@@ -1,7 +1,7 @@
 set -gx NPM_TOKEN {{ (bitwardenFields "item" "www.npmjs.com").TOKEN.value }}
 set -gx VAULT_ADDR "https://vault.busbud-int.com"
 set -gx GITHUB_TOKEN {{ (bitwardenFields "item" "github.com").TOKEN.value }}
-set -gx BUSBUD_TOKEN_PREVIEW {{ (bitwardenFields "item" "napi-preview.busbud.com").DAMIN_TOKEN.value }}
+set -gx BUSBUD_TOKEN_PREVIEW {{ (bitwardenFields "item" "napi-preview.busbud.com").ADMIN_TOKEN.value }}
 set -gx BUSBUD_TOKEN_PROD {{ (bitwardenFields "item" "napi.busbud.com").ADMIN_TOKEN.value }}
 set -gx NAPI_PREVIEW_TOKEN $BUSBUD_TOKEN_PREVIEW
 set -gx NAPI_PROD_TOKEN $BUSBUD_TOKEN_PROD
