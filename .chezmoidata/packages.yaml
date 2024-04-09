@@ -18,7 +18,6 @@ packages:
       - "gh"
       - "fish"
       - "go"
-      - "bitwarden-cli"
     brews_with_args:
       neovim:
         name: "neovim"
@@ -35,3 +34,4 @@ packages:
     - "cargo"
     - "elasticsearch"
     - "prettierd"
+    - "bitwarden-cli"
