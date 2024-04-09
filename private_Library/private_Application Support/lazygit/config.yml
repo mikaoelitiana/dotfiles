@@ -1,0 +1,32 @@
+os:
+  editCommand: "nvim"
+  editCommandTemplate: "{{editor}} +{{line}} -- {{filename}}"
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - bold
+      - "#5A5A5A"
+    selectedRangeBgColor:
+      - bold
+      - "#5A5A5A"
+    cherryPickedCommitBgColor:
+      - cyan
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
+  showIcons: true
+git:
+  paging:
+    colorArg: always
+    # pager: diff-so-fancy
+    pager: delta --dark --paging=never
