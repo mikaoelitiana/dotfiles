@@ -14,7 +14,6 @@ packages:
       - "vault"
       - "rabbitmq"
       - "zellij"
-      - "prettierd"
       - "lazygit"
       - "gh"
       - "fish"
@@ -34,3 +33,4 @@ packages:
   nix:
     - "cargo"
     - "elasticsearch"
+    - "prettierd"
