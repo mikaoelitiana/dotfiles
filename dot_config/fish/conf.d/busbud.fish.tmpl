@@ -5,7 +5,5 @@ set -gx BUSBUD_TOKEN_PREVIEW {{ (bitwardenFields "item" "napi-preview.busbud.com
 set -gx BUSBUD_TOKEN_PROD {{ (bitwardenFields "item" "napi.busbud.com").ADMIN_TOKEN.value }}
 set -gx NAPI_PREVIEW_TOKEN $BUSBUD_TOKEN_PREVIEW
 set -gx NAPI_PROD_TOKEN $BUSBUD_TOKEN_PROD
-set -gx AWS_ACCESS_KEY_ID {{ (bitwardenFields "item" "signin.aws.amazon.com - busbud").AWS_ACCESS_KEY_ID.value }}
-set -gx AWS_SECRET_ACCESS_KEY {{ (bitwardenFields "item" "signin.aws.amazon.com - busbud").AWS_SECRET_ACCESS_KEY.value }}
 fish_add_path -g ~/.yarn/bin/
 fish_add_path ~/Workspace/integrations/_tools/bbint/
