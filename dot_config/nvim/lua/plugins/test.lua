@@ -85,6 +85,11 @@ return {
 			opts.consumers = {
 				overseer = require("neotest.consumers.overseer"),
 			}
+
+			opts.discovery = {
+				concurrent = 1,
+				enabled = false,
+			}
 		end,
 		keys = {
 			--   {
