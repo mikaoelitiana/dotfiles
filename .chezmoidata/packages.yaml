@@ -32,7 +32,7 @@ packages:
       - "kitty"
       - "bruno"
   nix:
-    - "cargo"
-    - "elasticsearch"
-    - "prettierd"
-    - "bitwarden-cli"
+    - "nixpkgs.cargo"
+    - "nixpkgs.elasticsearch"
+    - "nixpkgs.prettierd"
+    - "nixpkgs.bitwarden-cli"
