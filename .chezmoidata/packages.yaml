@@ -18,7 +18,7 @@ packages:
       - "gh"
       - "fish"
       - "go"
-      - "tnk-studio/tools/lazykube"
+      - "derailed/k9s/k9s"
     brews_with_args:
       neovim:
         name: "neovim"
