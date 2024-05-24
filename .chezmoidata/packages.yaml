@@ -32,6 +32,7 @@ packages:
       - "kitty"
       - "bruno"
       - "rectangle"
+      - "another-redis-desktop-manager"
   nix:
     - "nixpkgs.cargo"
     - "nixpkgs.elasticsearch"
