@@ -286,4 +286,16 @@ return {
       })
     end,
   },
+  {
+    "cbochs/portal.nvim",
+    -- Optional dependencies
+    dependencies = {
+      "cbochs/grapple.nvim",
+      "ThePrimeagen/harpoon",
+    },
+    keys = {
+      { "<leader>o", "<cmd>Portal jumplist backward<cr>", desc = "Jump backward" },
+      { "<leader>i", "<cmd>Portal jumplist forward<cr>", desc = "Jump forward" },
+    },
+  },
 }
