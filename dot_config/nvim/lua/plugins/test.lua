@@ -56,7 +56,10 @@ return {
       },
     },
     opts = function(_, opts)
-      local is_mocha_test_file = M.create_test_file_extensions_matcher({ "-test" }, { "js", "jsx", "ts", "tsx" })
+      local is_mocha_test_file = M.create_test_file_extensions_matcher(
+        { "-test", "test", "spec" },
+        { "js", "jsx", "ts", "tsx" }
+      )
 
       opts.adapters = {
         ["neotest-jest"] = {
