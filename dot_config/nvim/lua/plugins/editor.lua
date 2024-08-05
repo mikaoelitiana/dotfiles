@@ -298,7 +298,7 @@ return {
 			{ "<leader>i", "<cmd>Portal jumplist forward<cr>", desc = "Jump forward" },
 		},
 	},
-	require({
+	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
 			{ "kkharji/sqlite.lua", module = "sqlite" },
@@ -307,5 +307,5 @@ return {
 		config = function()
 			require("neoclip").setup()
 		end,
-	}),
+	},
 }
