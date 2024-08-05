@@ -1,6 +1,6 @@
 local wk = require("which-key")
 
-wk.register({
+wk.add({
 	["<leader>"] = {
 		c = {
 			o = {
