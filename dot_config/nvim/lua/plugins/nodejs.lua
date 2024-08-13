@@ -61,10 +61,10 @@ return {
 				},
 			})
 			overseer.register_template({
-				name = "tsc --watch",
+				name = "pnpm tsc --watch",
 				builder = function()
 					return {
-						cmd = { "yarn", "tsc", "--watch", "--noEmit" }, -- or however you're running tsc --watch
+						cmd = { "pnpm", "tsc", "--watch", "--noEmit" }, -- or however you're running tsc --watch
 						components = {
 							{
 								"on_output_parse",
