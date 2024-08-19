@@ -19,6 +19,7 @@ packages:
       - "fish"
       - "go"
       - "derailed/k9s/k9s"
+      - "ripgrep"
     brews_with_args:
       neovim:
         name: "neovim"
