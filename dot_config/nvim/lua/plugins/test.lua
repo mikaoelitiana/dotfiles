@@ -12,11 +12,7 @@ local function get_var(my_var_name, default_value)
 end
 
 wk.add({
-	["<leader>"] = {
-		t = {
-			name = "+test",
-		},
-	},
+	{ "<leader>t", group = "+test" },
 })
 
 local M = {}
