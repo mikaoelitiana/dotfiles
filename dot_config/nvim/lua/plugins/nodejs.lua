@@ -1,13 +1,7 @@
 local wk = require("which-key")
 
 wk.add({
-	["<leader>"] = {
-		c = {
-			o = {
-				name = "+overseer",
-			},
-		},
-	},
+	{ "<leader>co", group = "+overseer" },
 })
 
 return {
