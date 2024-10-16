@@ -308,4 +308,12 @@ return {
 			require("neoclip").setup()
 		end,
 	},
+	{
+		"tpope/vim-abolish",
+		init = function()
+			-- https://github.com/gregorias/coerce.nvim
+			-- Disable coercion mappings. I use coerce.nvim for that.
+			-- vim.g.abolish_no_mappings = true
+		end,
+	},
 }
