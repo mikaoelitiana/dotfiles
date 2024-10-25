@@ -1,10 +1,11 @@
 return {
 	{
-		"nvim-zh/colorful-winsep.nvim",
+		"levouh/tint.nvim",
+		name = "tint",
 		opts = {
-			no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest", "neo-tree" },
+			tint = -60, -- Darken colors, use a positive value to brighten
+			saturation = 0.6, -- Saturation to preserve
 		},
-		event = { "WinNew" },
 	},
 	{
 		"s1n7ax/nvim-window-picker",
