@@ -48,9 +48,13 @@ return {
 					{
 						type = "node",
 						request = "launch",
-						name = "Launch file (" .. language .. ")",
-						program = "${file}",
+						name = "Run file with ts-node",
 						cwd = "${workspaceFolder}",
+						runtimeArgs = { "-r", "ts-node/register" },
+						runtimeExecutable = "node",
+						args = { "--inspect", "${file}" },
+						skipFiles = { "node_modules/**" },
+						console = "integratedTerminal",
 					},
 					{
 						type = "node",
@@ -65,13 +69,6 @@ return {
 					},
 				}
 			end
-
-			-- read .vscode/launch.json
-			require("dap.ext.vscode").load_launchjs(nil, {
-				node = { "javascript", "javascriptreact", "typescriptreact", "typescript" },
-				node2 = {},
-				["pwa-node"] = { "javascript", "javascriptreact", "typescriptreact", "typescript" },
-			})
 		end,
 	},
 }
