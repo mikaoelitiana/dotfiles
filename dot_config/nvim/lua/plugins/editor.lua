@@ -138,35 +138,6 @@ return {
 		end,
 	},
 	{
-		"princejoogie/dir-telescope.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-		opts = {
-			hidden = false,
-			show_preview = true,
-			no_ignore = true,
-		},
-		config = function(_, opts)
-			require("dir-telescope").setup(opts)
-			require("telescope").load_extension("dir")
-		end,
-		keys = {
-			{
-				"<leader>se",
-				function()
-					require("telescope").extensions.dir.live_grep()
-				end,
-				desc = "Live grep in selected directory",
-			},
-			{
-				"<leader>fd",
-				function()
-					require("telescope").extensions.dir.find_files()
-				end,
-				desc = "Find file in selected directory",
-			},
-		},
-	},
-	{
 		"kylechui/nvim-surround",
 		version = "*",
 		event = "VeryLazy",
@@ -200,7 +171,6 @@ return {
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
 			{ "kkharji/sqlite.lua", module = "sqlite" },
-			{ "nvim-telescope/telescope.nvim" },
 		},
 		config = function()
 			require("neoclip").setup()
