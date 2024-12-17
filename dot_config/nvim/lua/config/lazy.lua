@@ -49,8 +49,3 @@ require("lazy").setup({
 		},
 	},
 })
-
--- telescope plugins
-local telescope = require("telescope")
-telescope.load_extension("lazy_plugins")
-telescope.load_extension("chezmoi")
