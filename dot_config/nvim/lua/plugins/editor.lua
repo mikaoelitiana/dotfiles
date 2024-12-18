@@ -1,3 +1,5 @@
+local actions = require("fzf-lua.actions")
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -183,5 +185,15 @@ return {
 			-- Disable coercion mappings. I use coerce.nvim for that.
 			-- vim.g.abolish_no_mappings = true
 		end,
+	},
+	{
+		"ibhagwan/fzf-lua",
+		opts = {
+			actions = {
+				files = {
+					["enter"] = actions.file_edit,
+				},
+			},
+		},
 	},
 }
