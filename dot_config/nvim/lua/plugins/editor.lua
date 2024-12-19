@@ -194,6 +194,12 @@ return {
 					["enter"] = actions.file_edit,
 				},
 			},
+			keymap = {
+				fzf = {
+					["tab"] = "down",
+					["shift-tab"] = "up",
+				},
+			},
 		},
 	},
 }
