@@ -45,11 +45,6 @@ return {
 			"nvim-treesitter/nvim-treesitter", -- should fix https://github.com/nvim-neotest/neotest-jest/issues/85
 			"nvim-neotest/neotest-jest",
 			"marilari88/neotest-vitest",
-			{
-				"mrcjkb/rustaceanvim",
-				version = "^4", -- Recommended
-				ft = { "rust" },
-			},
 		},
 		opts = function(_, opts)
 			local is_mocha_test_file = M.create_test_file_extensions_matcher(
@@ -82,7 +77,6 @@ return {
 						or is_mocha_test_file,
 				},
 				["neotest-vitest"] = {},
-				["rustaceanvim.neotest"] = {},
 			}
 
 			opts.status = {
@@ -101,20 +95,6 @@ return {
 			}
 		end,
 		keys = {
-			--   {
-			--     "<leader>tf",
-			--     function()
-			--       require("neotest").run.run(vim.fn.expand("%"))
-			--     end,
-			--     desc = "Run current test file",
-			--   },
-			--   {
-			--     "<leader>tn",
-			--     function()
-			--       require("neotest").run.run()
-			--     end,
-			--     desc = "Run nearest test",
-			--   },
 			{
 				"<leader>tl",
 				function()
@@ -122,27 +102,6 @@ return {
 				end,
 				desc = "Run last test",
 			},
-			--   {
-			--     "<leader>td",
-			--     function()
-			--       require("neotest").run.run({ strategy = "dap" })
-			--     end,
-			--     desc = "Debug nearest test",
-			--   },
-			--   {
-			--     "<leader>ts",
-			--     function()
-			--       require("neotest").summary.toggle()
-			--     end,
-			--     desc = "Toggle summary view",
-			--   },
-			--   {
-			--     "<leader>to",
-			--     function()
-			--       require("neotest").output.open({ enter = true })
-			--     end,
-			--     desc = "View output",
-			--   },
 		},
 	},
 }
