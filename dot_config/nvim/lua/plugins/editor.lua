@@ -192,12 +192,15 @@ return {
 			actions = {
 				files = {
 					["enter"] = actions.file_edit,
+					["ctrl-q"] = actions.file_sel_to_qf,
 				},
 			},
 			keymap = {
 				fzf = {
 					["tab"] = "down",
 					["shift-tab"] = "up",
+					["ctrl-a"] = "toggle-all",
+					["ctrl-space"] = "toggle",
 				},
 			},
 		},
