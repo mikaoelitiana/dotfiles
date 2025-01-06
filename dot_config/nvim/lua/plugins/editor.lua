@@ -192,7 +192,7 @@ return {
 			actions = {
 				files = {
 					["enter"] = actions.file_edit,
-					["ctrl-q"] = actions.file_sel_to_qf,
+					["alt-q"] = actions.file_sel_to_qf,
 				},
 			},
 			keymap = {
