@@ -25,14 +25,6 @@ wk.add({
 
 return {
 	{
-		"levouh/tint.nvim",
-		name = "tint",
-		opts = {
-			tint = -60, -- Darken colors, use a positive value to brighten
-			saturation = 0.6, -- Saturation to preserve
-		},
-	},
-	{
 		"s1n7ax/nvim-window-picker",
 		name = "window-picker",
 		event = "VeryLazy",
