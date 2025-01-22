@@ -22,7 +22,6 @@ return {
 				"eslint-lsp",
 				"html-lsp",
 				"js-debug-adapter",
-				"node-debug2-adapter",
 				"typescript-language-server",
 				"tailwindcss-language-server",
 			})
