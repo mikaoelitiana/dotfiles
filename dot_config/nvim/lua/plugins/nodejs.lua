@@ -1,11 +1,4 @@
-local wk = require("which-key")
-
-wk.add({
-	{ "<leader>co", group = "+overseer" },
-})
-
 return {
-
 	-- add js to treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -42,57 +35,6 @@ return {
 					end)
 				end,
 			},
-		},
-	},
-	{
-		"stevearc/overseer.nvim",
-		config = function()
-			local overseer = require("overseer")
-			overseer.setup({
-				sections = {
-					lualine_x = { "overseer" },
-				},
-			})
-			overseer.register_template({
-				name = "pnpm tsc --watch",
-				builder = function()
-					return {
-						cmd = { "pnpm", "tsc", "--watch", "--noEmit" }, -- or however you're running tsc --watch
-						components = {
-							{
-								"on_output_parse",
-								problem_matcher = "$tsc-watch",
-							},
-							"default",
-							"on_result_notify",
-							"on_result_diagnostics",
-							"on_complete_restart",
-						},
-					}
-				end,
-			})
-			overseer.register_template({
-				name = "yarn tsc --watch",
-				builder = function()
-					return {
-						cmd = { "yarn", "tsc", "--watch", "--noEmit" }, -- or however you're running tsc --watch
-						components = {
-							{
-								"on_output_parse",
-								problem_matcher = "$tsc-watch",
-							},
-							"default",
-							"on_result_notify",
-							"on_result_diagnostics",
-							"on_complete_restart",
-						},
-					}
-				end,
-			})
-		end,
-		keys = {
-			{ "<leader>cot", "<cmd>OverseerToggle<cr>", desc = "Overseer Toggle" },
-			{ "<leader>cor", "<cmd>OverseerRun<cr>", desc = "Overseer Run" },
 		},
 	},
 }
