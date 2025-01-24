@@ -19,6 +19,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.linting.eslint" },
 		{ import = "lazyvim.plugins.extras.formatting.prettier" },
 		{ import = "lazyvim.plugins.extras.dap.core" },
+		{ import = "lazyvim.plugins.extras.editor.overseer" },
 		{ import = "lazyvim.plugins.extras.ai.copilot" },
 		{ import = "plugins" },
 	},
