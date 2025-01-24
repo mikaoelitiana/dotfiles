@@ -1,5 +1,11 @@
 local actions = require("fzf-lua.actions")
 
+local wk = require("which-key")
+
+wk.add({
+	{ "<leader>j", group = "+jumplist" },
+})
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -165,8 +171,8 @@ return {
 			"ThePrimeagen/harpoon",
 		},
 		keys = {
-			{ "<leader>o", "<cmd>Portal jumplist backward<cr>", desc = "Jump backward" },
-			{ "<leader>i", "<cmd>Portal jumplist forward<cr>", desc = "Jump forward" },
+			{ "<leader>jo", "<cmd>Portal jumplist backward<cr>", desc = "Jump backward" },
+			{ "<leader>ji", "<cmd>Portal jumplist forward<cr>", desc = "Jump forward" },
 		},
 	},
 	{
