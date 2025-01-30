@@ -86,7 +86,7 @@ return {
 			}
 
 			opts.consumers = {
-				-- overseer = require("neotest.consumers.overseer"),
+				overseer = require("neotest.consumers.overseer"),
 			}
 
 			opts.discovery = {
