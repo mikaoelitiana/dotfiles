@@ -1,3 +1,31 @@
+-- try to execute JS/TS files with ts-node
+for _, language in ipairs({ "javascript", "typescript" }) do
+	require("dap").configurations[language] = {
+		{
+			type = "node",
+			request = "launch",
+			name = "Run file with ts-node",
+			cwd = "${workspaceFolder}",
+			runtimeArgs = { "-r", "ts-node/register" },
+			runtimeExecutable = "node",
+			args = { "--inspect", "${file}" },
+			skipFiles = { "node_modules/**" },
+			console = "integratedTerminal",
+		},
+		{
+			type = "node",
+			request = "attach",
+			name = "Attach to process (" .. language .. ")",
+			processId = require("dap.utils").pick_process,
+			cwd = "${workspaceFolder}",
+			sourceMaps = true,
+			protocol = "inspector",
+			console = "integratedTerminal",
+			outputCapture = "std",
+		},
+	}
+end
+
 return {
 	{
 		"jay-babu/mason-nvim-dap.nvim",
