@@ -27,19 +27,6 @@ return {
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-context",
-		event = "VeryLazy",
-		keys = {
-			{
-				"gC",
-				function()
-					require("treesitter-context").go_to_context()
-				end,
-				desc = "Go to context",
-			},
-		},
-	},
-	{
 		"nvim-neo-tree/neo-tree.nvim",
 		--  https://github.com/nvim-neo-tree/neo-tree.nvim#configuration-for-nerd-fonts-v3-users
 		cmd = "Neotree",
