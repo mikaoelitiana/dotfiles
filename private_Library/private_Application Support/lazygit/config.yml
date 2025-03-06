@@ -28,5 +28,4 @@ gui:
 git:
   paging:
     colorArg: always
-    # pager: diff-so-fancy
-    pager: delta --paging=never
+    pager: delta delta --detect-dark-light=always --light --paging=never
