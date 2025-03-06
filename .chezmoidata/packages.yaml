@@ -13,13 +13,13 @@ packages:
       - "neovim-remote"
       - "vault"
       - "rabbitmq"
-      - "zellij"
       - "lazygit"
       - "gh"
       - "fish"
       - "go"
       - "derailed/k9s/k9s"
       - "ripgrep"
+      - "diff-so-fancy"
     brews_with_args:
       neovim:
         name: "neovim"
@@ -30,8 +30,6 @@ packages:
       - "dbeaver-community"
       - "gitbutler"
       - "google-cloud-sdk"
-      - "kitty"
-      - "bruno"
       - "rectangle"
       - "another-redis-desktop-manager"
       - "ghostty"
