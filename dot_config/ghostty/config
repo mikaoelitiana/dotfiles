@@ -1,1 +1,2 @@
 macos-option-as-alt = true
+theme = light:catppuccin-latte.conf,dark:catppuccin-frappe.conf
