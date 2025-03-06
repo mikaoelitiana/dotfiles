@@ -1,7 +1,7 @@
 return {
 	{
 		"LazyVim/LazyVim",
-		opts = { colorscheme = "catppuccin-frappe" },
+		opts = { colorscheme = "catppuccin-latte" },
 	},
 	{
 		"luukvbaal/statuscol.nvim",
