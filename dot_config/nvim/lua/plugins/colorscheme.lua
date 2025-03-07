@@ -7,8 +7,11 @@ return {
 	},
 	{
 		"catppuccin/nvim",
-		lazy = true,
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
 		opts = {
+			flavour = "auto",
 			background = {
 				light = "latte",
 				dark = "frappe",
