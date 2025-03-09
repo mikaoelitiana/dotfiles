@@ -54,7 +54,9 @@ return {
 		"mfussenegger/nvim-dap",
 		opts = function()
 			local dap = require("dap")
-			dap.adapters["pwa-node"].host = "::1"
+			if dap.adapters["pwa-node"] then
+				dap.adapters["pwa-node"].host = "::1"
+			end
 		end,
 	},
 }
