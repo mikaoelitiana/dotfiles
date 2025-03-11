@@ -4,10 +4,10 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 		{
 			type = "node",
 			request = "launch",
-			name = "Run file with ts-node",
+			name = "Run file with tsx",
 			cwd = "${workspaceFolder}",
-			runtimeArgs = { "-r", "ts-node/register" },
-			runtimeExecutable = "node",
+			runtimeArgs = { "tsx" },
+			runtimeExecutable = "npx",
 			args = { "--inspect", "${file}" },
 			skipFiles = { "node_modules/**" },
 			console = "integratedTerminal",
