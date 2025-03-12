@@ -4,10 +4,10 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 		{
 			type = "node",
 			request = "launch",
-			name = "Run file with ts-node",
+			name = "Run file with tsx",
 			cwd = "${workspaceFolder}",
-			runtimeArgs = { "-r", "ts-node/register" },
-			runtimeExecutable = "node",
+			runtimeArgs = { "tsx" },
+			runtimeExecutable = "npx",
 			args = { "--inspect", "${file}" },
 			skipFiles = { "node_modules/**" },
 			console = "integratedTerminal",
@@ -54,7 +54,9 @@ return {
 		"mfussenegger/nvim-dap",
 		opts = function()
 			local dap = require("dap")
-			dap.adapters["pwa-node"].host = "::1"
+			if dap.adapters["pwa-node"] then
+				dap.adapters["pwa-node"].host = "::1"
+			end
 		end,
 	},
 }
