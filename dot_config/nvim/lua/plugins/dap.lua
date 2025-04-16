@@ -14,6 +14,17 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 		},
 		{
 			type = "node",
+			request = "launch",
+			name = "Run file with bun",
+			cwd = "${workspaceFolder}",
+			runtimeArgs = { "run" },
+			runtimeExecutable = "bun",
+			args = { "--inspect", "${file}" },
+			skipFiles = { "node_modules/**" },
+			console = "integratedTerminal",
+		},
+		{
+			type = "node",
 			request = "attach",
 			name = "Attach to process (" .. language .. ")",
 			processId = require("dap.utils").pick_process,
