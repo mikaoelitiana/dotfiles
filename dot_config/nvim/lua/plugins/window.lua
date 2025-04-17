@@ -107,6 +107,7 @@ return {
 		"folke/snacks.nvim",
 		opts = {
 			lazygit = {
+				theme = {},
 				win = {
 					height = 0,
 					width = 0,
