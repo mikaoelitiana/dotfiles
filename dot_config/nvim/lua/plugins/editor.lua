@@ -119,24 +119,6 @@ return {
 		end,
 	},
 	{
-		"kylechui/nvim-surround",
-		version = "*",
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					normal = "ys",
-					delete = "ds",
-					visual = "z",
-					visual_line = "gS",
-					change = "cs",
-					change_line = "cS",
-				},
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
-	},
-	{
 		"cbochs/portal.nvim",
 		-- Optional dependencies
 		dependencies = {
