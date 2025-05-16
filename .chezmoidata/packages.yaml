@@ -35,6 +35,5 @@ packages:
       - "ghostty"
   nix:
     - "nixpkgs.cargo"
-    - "nixpkgs.elasticsearch"
     - "nixpkgs.prettierd"
     - "nixpkgs.bitwarden-cli"
