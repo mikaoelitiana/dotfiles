@@ -140,12 +140,9 @@ return {
 		end,
 	},
 	{
-		"tpope/vim-abolish",
-		init = function()
-			-- https://github.com/gregorias/coerce.nvim
-			-- Disable coercion mappings. I use coerce.nvim for that.
-			-- vim.g.abolish_no_mappings = true
-		end,
+		"gregorias/coerce.nvim",
+		tag = "v4.1.0",
+		config = true,
 	},
 	{
 		"ibhagwan/fzf-lua",
