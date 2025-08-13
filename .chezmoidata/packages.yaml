@@ -12,7 +12,6 @@ packages:
       - "lua-language-server"
       - "neovim-remote"
       - "vault"
-      - "rabbitmq"
       - "lazygit"
       - "gh"
       - "fish"
@@ -28,7 +27,6 @@ packages:
     casks:
       - "google-chrome"
       - "dbeaver-community"
-      - "gitbutler"
       - "google-cloud-sdk"
       - "rectangle"
       - "another-redis-desktop-manager"
