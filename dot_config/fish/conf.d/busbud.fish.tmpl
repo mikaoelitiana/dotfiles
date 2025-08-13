@@ -3,6 +3,7 @@ set -gx VAULT_ADDR "https://vault.busbud-int.com"
 set -gx GITHUB_TOKEN {{ (bitwardenFields "item" "github.com").TOKEN.value }}
 set -gx BUSBUD_TOKEN_PREVIEW {{ (bitwardenFields "item" "napi-preview.busbud.com").ADMIN_TOKEN.value }}
 set -gx BUSBUD_TOKEN_PROD {{ (bitwardenFields "item" "napi.busbud.com").ADMIN_TOKEN.value }}
+set -gx OPEN_EXCHANGE_RATES_KEY {{ (bitwardenFields "item" "openexchangerates.org").API_KEY.value }} 
 set -gx NAPI_PREVIEW_TOKEN $BUSBUD_TOKEN_PREVIEW
 set -gx NAPI_PROD_TOKEN $BUSBUD_TOKEN_PROD
 fish_add_path -g ~/.yarn/bin/
