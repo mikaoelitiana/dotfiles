@@ -1,2 +1,3 @@
 #!/bin/sh
-mise up
+# install all mise tools
+mise install
