@@ -7,7 +7,6 @@ packages:
       - "gpg"
       - "colima"
       - "fish"
-      - "jq"
       - "libdap"
       - "lua-language-server"
       - "neovim-remote"
