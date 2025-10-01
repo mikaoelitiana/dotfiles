@@ -14,7 +14,7 @@ end
 
 map("n", "<leader>fy", "<cmd>let @*=expand('%')<cr>", { desc = "Yank file path to clipboard" })
 map("n", "<leader>fY", "<cmd>echo expand('%')<cr>", { desc = "Echo file path" })
-map("n", "<leader>ce", "<cmd>EslintFixAll<cr>", { desc = "EslintFixAll" })
+map("n", "<leader>ce", "<cmd>LspEslintFixAll<cr>", { desc = "LspEslintFixAll" })
 
 --
 local fzf_chezmoi = function()
