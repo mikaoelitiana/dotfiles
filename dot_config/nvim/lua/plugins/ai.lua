@@ -21,11 +21,20 @@ return {
 		---@module 'avante'
 		---@type avante.Config
 		opts = {
-			provider = "ollama",
+			provider = "mistral",
 			providers = {
 				ollama = {
-					endpoint = "http://localhost:11434", -- Note that there is no /v1 at the end.
-					model = "codellama",
+					endpoint = "http://127.0.0.1:11434",
+					model = "qwen3-coder:30b",
+				},
+				mistral = {
+					__inherited_from = "openai",
+					api_key_name = "AVANTE_MISTRAL_API_KEY",
+					endpoint = "https://api.mistral.ai/v1/",
+					model = "devstral-medium-2507",
+					extra_request_body = {
+						max_tokens = 4096, -- to avoid using max_completion_tokens
+					},
 				},
 			},
 		},
