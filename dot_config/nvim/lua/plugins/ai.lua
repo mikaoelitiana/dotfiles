@@ -21,21 +21,55 @@ return {
 		---@module 'avante'
 		---@type avante.Config
 		opts = {
-			provider = "mistral",
+			-- mode = "agentic",
+			provider = "lmstudio",
+			auto_suggestions_provider = "ollama",
+			cursor_applying_provider = "ollama",
 			providers = {
 				ollama = {
 					endpoint = "http://127.0.0.1:11434",
-					model = "qwen3-coder:30b",
-				},
-				mistral = {
-					__inherited_from = "openai",
-					api_key_name = "AVANTE_MISTRAL_API_KEY",
-					endpoint = "https://api.mistral.ai/v1/",
-					model = "devstral-medium-2507",
+					-- model = "qwen3-coder:30b",
+					-- model = "devstral:24b",
+					model = "cogito:14b",
+					disable_tools = false,
 					extra_request_body = {
-						max_tokens = 4096, -- to avoid using max_completion_tokens
+						stream = true,
 					},
 				},
+				-- mistral = {
+				-- 	__inherited_from = "openai",
+				-- 	api_key_name = "AVANTE_MISTRAL_API_KEY",
+				-- 	endpoint = "https://api.mistral.ai/v1/",
+				-- 	model = "devstral-medium-2507",
+				-- 	extra_request_body = {
+				-- 		max_tokens = 4096, -- to avoid using max_completion_tokens
+				-- 	},
+				-- },
+				lmstudio = {
+					__inherited_from = "openai",
+					endpoint = "http://127.0.0.1:1234/v1",
+					api_key_name = "",
+					model = "qwen/qwen3-30b-a3b-2507",
+					extra_request_body = {
+						max_tokens = 4096, -- to avoid using max_completion_tokens
+						stream = true,
+					},
+				},
+			},
+			behaviour = {
+				enable_cursor_planning_mode = false,
+				auto_focus_sidebar = true,
+				auto_suggestions = true,
+				auto_suggestions_respect_ignore = false,
+				auto_set_highlight_group = true,
+				auto_set_keymaps = true,
+				auto_apply_diff_after_generation = true,
+				jump_result_buffer_on_finish = false,
+				support_paste_from_clipboard = false,
+				minimize_diff = true,
+				enable_token_counting = true,
+				use_cwd_as_project_root = false,
+				auto_focus_on_diff_view = false,
 			},
 		},
 		dependencies = {
