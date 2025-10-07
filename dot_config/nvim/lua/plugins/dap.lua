@@ -15,6 +15,17 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 		{
 			type = "node",
 			request = "launch",
+			name = "Run file with ts-node",
+			cwd = "${workspaceFolder}",
+			runtimeArgs = { "ts-node", "-r tsconfig-paths/register" },
+			runtimeExecutable = "npx",
+			args = { "--inspect", "${file}" },
+			skipFiles = { "node_modules/**" },
+			console = "integratedTerminal",
+		},
+		{
+			type = "node",
+			request = "launch",
 			name = "Run file with bun",
 			cwd = "${workspaceFolder}",
 			runtimeArgs = { "run" },
