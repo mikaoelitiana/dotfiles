@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "github": {
+      "autoApprove": [],
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  },
+  "nativeMCPServers": {
+    "mcphub": {
+      "disabled": false
+    },
+    "neovim": {
+      "disabled": false
+    }
+  }
+}
