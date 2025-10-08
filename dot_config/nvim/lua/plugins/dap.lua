@@ -22,6 +22,7 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 			args = { "--inspect", "${file}" },
 			skipFiles = { "node_modules/**" },
 			console = "integratedTerminal",
+			env = { NODE_ENV = "local" },
 		},
 		{
 			type = "node",
