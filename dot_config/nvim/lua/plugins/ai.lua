@@ -13,6 +13,10 @@ return {
 						make_slash_commands = true, -- make /slash commands from MCP server prompts
 					},
 				},
+				global_env = {
+					-- Array-style: uses os.getenv("VAR")
+					"AVANTE_GITHUB_TOKEN",
+				},
 			})
 		end,
 	},
