@@ -1,0 +1,9 @@
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+. "$HOME/.local/bin/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/mikaoelitiana/.lmstudio/bin"
+# End of LM Studio CLI section
+
+eval "$(mise activate zsh)"
