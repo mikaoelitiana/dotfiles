@@ -17,6 +17,7 @@ packages:
       - "derailed/k9s/k9s"
       - "ripgrep"
       - "diff-so-fancy"
+      - "opencode"
     brews_with_args:
       neovim:
         name: "neovim"
