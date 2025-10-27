@@ -6,7 +6,7 @@
 vim.o.exrc = true
 
 -- ensure signcolumn is always enabled
-require("lazyvim.util").lsp.on_attach(function()
-  vim.opt.signcolumn = "yes"
-  vim.opt.conceallevel = 0
+require("snacks").util.lsp.on(function()
+	vim.opt.signcolumn = "yes"
+	vim.opt.conceallevel = 0
 end)
