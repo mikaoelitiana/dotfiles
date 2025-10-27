@@ -20,4 +20,10 @@ return {
 			})
 		end,
 	},
+	{
+		"yetone/avante.nvim",
+		opts = {
+			provider = "opencode",
+		},
+	},
 }
