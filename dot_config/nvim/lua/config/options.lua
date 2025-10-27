@@ -4,9 +4,3 @@
 
 -- load .nvimrc files in projects root
 vim.o.exrc = true
-
--- ensure signcolumn is always enabled
-require("snacks").util.lsp.on(function()
-	vim.opt.signcolumn = "yes"
-	vim.opt.conceallevel = 0
-end)
