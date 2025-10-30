@@ -17,9 +17,8 @@ function reset_windowserver -d "Reset Window Server preferences and restart comp
     rm /Library/Preferences/com.apple.windowserver.displays.plist
 
     echo "Window Server preferences have been reset."
-    echo "The computer will restart in 5 seconds..."
-    sleep 5
-
-    # Restart the computer
-    shutdown -r now
+    echo "You will now be prompted to restart your computer..."
+    
+    # Restart the computer with native macOS dialog
+    osascript -e 'tell app "System Events" to restart'
 end
