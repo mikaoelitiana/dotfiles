@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "model": "gpt-4.1",
+}

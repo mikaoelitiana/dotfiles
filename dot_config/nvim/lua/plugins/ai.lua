@@ -1,29 +1,24 @@
 return {
 	{
-		"ravitemer/mcphub.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		build = "bundled_build.lua", -- Bundles `mcp-hub` binary along with the neovim plugin
+		"sudo-tee/opencode.nvim",
 		config = function()
-			require("mcphub").setup({
-				use_bundled_binary = true, -- Use local `mcp-hub` binary
-				extensions = {
-					avante = {
-						make_slash_commands = true, -- make /slash commands from MCP server prompts
-					},
-				},
-				global_env = {
-					-- Array-style: uses os.getenv("VAR")
-					"AVANTE_GITHUB_TOKEN",
-				},
+			require("opencode").setup({
+				keymap_prefix = "<leader>a",
 			})
 		end,
-	},
-	{
-		"yetone/avante.nvim",
-		opts = {
-			provider = "opencode",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					anti_conceal = { enabled = false },
+					file_types = { "markdown", "opencode_output" },
+				},
+				ft = { "markdown", "Avante", "copilot-chat", "opencode_output" },
+			},
+			-- Optional, for file mentions and commands completion, pick only one
+			"saghen/blink.cmp",
+			"folke/snacks.nvim",
 		},
 	},
 }
