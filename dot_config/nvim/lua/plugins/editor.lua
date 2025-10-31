@@ -4,6 +4,7 @@ local wk = require("which-key")
 
 wk.add({
 	{ "<leader>j", group = "+jumplist" },
+	{ "<leader>a", group = "+ai" },
 })
 
 return {
