@@ -52,11 +52,10 @@ end
 return {
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		depedencies = "mason.nvim",
 		config = function()
 			require("mason-nvim-dap").setup({
 				ensure_installed = { "js", "node2" },
-				automatic_installation = true,
+				automatic_installation = false,
 				handlers = {
 					function(config)
 						require("mason-nvim-dap").default_setup(config)
@@ -80,6 +79,13 @@ return {
 			if dap.adapters["pwa-node"] then
 				dap.adapters["pwa-node"].host = "::1"
 			end
+
+			-- Elixir
+			dap.adapters.mix_task = {
+				type = "executable",
+				command = vim.fn.stdpath("data") .. "/mason/bin/elixir-ls-debugger",
+				args = {},
+			}
 		end,
 	},
 }

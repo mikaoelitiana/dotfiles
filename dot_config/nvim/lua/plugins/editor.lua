@@ -1,5 +1,3 @@
-local actions = require("fzf-lua.actions")
-
 local wk = require("which-key")
 
 wk.add({
@@ -147,21 +145,24 @@ return {
 	},
 	{
 		"ibhagwan/fzf-lua",
-		opts = {
-			actions = {
-				files = {
-					["enter"] = actions.file_edit,
-					["alt-q"] = actions.file_sel_to_qf,
+		opts = function(_, opts)
+			local actions = require("fzf-lua.actions")
+			return {
+				actions = {
+					files = {
+						["enter"] = actions.file_edit,
+						["alt-q"] = actions.file_sel_to_qf,
+					},
 				},
-			},
-			keymap = {
-				fzf = {
-					["tab"] = "down",
-					["shift-tab"] = "up",
-					["ctrl-a"] = "toggle-all",
-					["ctrl-space"] = "toggle",
+				keymap = {
+					fzf = {
+						["tab"] = "down",
+						["shift-tab"] = "up",
+						["ctrl-a"] = "toggle-all",
+						["ctrl-space"] = "toggle",
+					},
 				},
-			},
-		},
+			}
+		end,
 	},
 }
