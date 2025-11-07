@@ -15,18 +15,3 @@ end
 map("n", "<leader>fy", "<cmd>let @*=expand('%')<cr>", { desc = "Yank file path to clipboard" })
 map("n", "<leader>fY", "<cmd>echo expand('%')<cr>", { desc = "Echo file path" })
 map("n", "<leader>ce", "<cmd>LspEslintFixAll<cr>", { desc = "LspEslintFixAll" })
-
---
-local fzf_chezmoi = function()
-	require("fzf-lua").fzf_exec(require("chezmoi.commands").list(), {
-		actions = {
-			["default"] = function(selected, opts)
-				require("chezmoi.commands").edit({
-					targets = { "~/" .. selected[1] },
-					args = { "--watch" },
-				})
-			end,
-		},
-	})
-end
-map("n", "<leader>cz", fzf_chezmoi, { desc = "Chezmoi" })
