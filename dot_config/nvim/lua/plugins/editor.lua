@@ -165,4 +165,20 @@ return {
 			}
 		end,
 	},
+	{
+		"folke/snacks.nvim",
+		opts = {
+			picker = {
+				win = {
+					input = {
+						keys = {
+							["<c-Space>"] = { "select_and_next", mode = { "i", "n" } },
+							["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+							["<Tab>"] = { "list_down", mode = { "i", "n" } },
+						},
+					},
+				},
+			},
+		},
+	},
 }
