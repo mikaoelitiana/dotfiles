@@ -46,6 +46,8 @@ return {
 			"nvim-neotest/neotest-jest",
 			"marilari88/neotest-vitest",
 			"jfpedroza/neotest-elixir",
+			"kikito/inspect.lua",
+			"arthur944/neotest-bun",
 		},
 		opts = function(_, opts)
 			local is_mocha_test_file = M.create_test_file_extensions_matcher(
@@ -53,33 +55,33 @@ return {
 				{ "js", "jsx", "ts", "tsx" }
 			)
 
-			opts.adapters = {
-				["neotest-jest"] = {
-					jestCommand = Neotest_jest_command ~= nil and Neotest_jest_command or "npx jest",
-					env = Neotest_jest_env ~= nil and Neotest_jest_env or { CI = true },
-				},
-				["neotest-mocha"] = {
-					command = get_var("neotest_mocha_command", "npm test --"),
-					command_args = neotest_mocha_command_args ~= nil and neotest_mocha_command_args
-						or function(context)
-							return {
-								"--full-trace",
-								"--reporter=json",
-								"--reporter-options=output=" .. context.results_path,
-								"--grep=" .. context.test_name_pattern,
-								context.path,
-							}
-						end,
-					env = neotest_mocha_env ~= nil and neotest_mocha_env
-						or { CI = true, TS_NODE_FILES = "true", TS_NODE_TRANSPILE_ONLY = "true", NODE_ENV = "test" },
-					cwd = function(path)
-						return vim.fn.getcwd()
-					end,
-					is_test_file = neotest_mocha_is_test_file ~= nil and neotest_mocha_is_test_file
-						or is_mocha_test_file,
-				},
-				["neotest-elixir"] = {},
+			opts.adapters = opts.adapters or {}
+
+			opts.adapters["neotest-jest"] = {
+				jestCommand = Neotest_jest_command ~= nil and Neotest_jest_command or "npx jest",
+				env = Neotest_jest_env ~= nil and Neotest_jest_env or { CI = true },
 			}
+			opts.adapters["neotest-mocha"] = {
+				command = get_var("neotest_mocha_command", "npm test --"),
+				command_args = neotest_mocha_command_args ~= nil and neotest_mocha_command_args or function(context)
+					return {
+						"--full-trace",
+						"--reporter=json",
+						"--reporter-options=output=" .. context.results_path,
+						"--grep=" .. context.test_name_pattern,
+						context.path,
+					}
+				end,
+				env = neotest_mocha_env ~= nil and neotest_mocha_env
+					or { CI = true, TS_NODE_FILES = "true", TS_NODE_TRANSPILE_ONLY = "true", NODE_ENV = "test" },
+				cwd = function(path)
+					return vim.fn.getcwd()
+				end,
+				is_test_file = neotest_mocha_is_test_file ~= nil and neotest_mocha_is_test_file or is_mocha_test_file,
+			}
+			opts.adapters["neotest-elixir"] = {}
+			opts.adapters["neotest-vitest"] = {}
+			opts.adapters["neotest-bun"] = {}
 
 			opts.status = {
 				enabled = true,
