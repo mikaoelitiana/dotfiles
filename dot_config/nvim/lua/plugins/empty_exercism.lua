@@ -2,7 +2,11 @@ return {
 	{
 		"2kabhishek/exercism.nvim",
 		cmd = { "Exercism" },
-		keys = { { "<leader>exa", desc = "Exercism select language" }, "<leader>exl", "<leader>exr" }, -- add your preferred keybindings
+		keys = {
+			{ "<leader>exa", desc = "Exercism select language" },
+			{ "<leader>exl", desc = "Exercism select exercice" },
+			{ "<leader>exr", desc = "Exercism recent exercices" },
+		}, -- add your preferred keybindings
 		dependencies = {
 			"2kabhishek/utils.nvim", -- required, for utility functions
 			"2kabhishek/termim.nvim", -- optional, better UX for running tests
