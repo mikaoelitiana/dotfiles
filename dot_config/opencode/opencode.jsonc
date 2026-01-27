@@ -1,7 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
-  "model": "github-copilot/gpt-4.1",
   "mcp": {
     "playwright": {
       "type": "local",
