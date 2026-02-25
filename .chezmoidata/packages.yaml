@@ -19,6 +19,7 @@ packages:
       - "diff-so-fancy"
       - "opencode"
       - "exercism"
+      - "beads"
     brews_with_args:
       neovim:
         name: "neovim"

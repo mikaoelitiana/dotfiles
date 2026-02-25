@@ -164,3 +164,7 @@ YOU MUST follow this debugging framework for ANY technical issue:
 - Document architectural decisions and their outcomes for future reference
 - Track patterns in user feedback to improve collaboration over time
 - When you notice something that should be fixed but is unrelated to your current task, document it in your journal rather than fixing it immediately
+
+## Task tracking 
+
+Use 'bd' for task tracking if it is available in the command line. Otherwise, use a Markdown file to plan and mark completed tasks
