@@ -20,6 +20,7 @@ packages:
       - "opencode"
       - "exercism"
       - "beads"
+      - "tmux"
     brews_with_args:
       neovim:
         name: "neovim"
