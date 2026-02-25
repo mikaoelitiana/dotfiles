@@ -21,6 +21,7 @@ packages:
       - "exercism"
       - "beads"
       - "tmux"
+      - "dolt"
     brews_with_args:
       neovim:
         name: "neovim"
