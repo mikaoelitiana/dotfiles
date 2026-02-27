@@ -17,7 +17,7 @@ packages:
       - "derailed/k9s/k9s"
       - "ripgrep"
       - "diff-so-fancy"
-      - "opencode"
+      - "anomalyco/tap/opencode"
       - "exercism"
       - "beads"
       - "tmux"
