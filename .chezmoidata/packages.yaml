@@ -34,4 +34,5 @@ packages:
       - "rectangle"
       - "another-redis-desktop-manager"
       - "ghostty"
+      - "emdash"
   nix:
