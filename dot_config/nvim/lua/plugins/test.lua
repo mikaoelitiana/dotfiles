@@ -47,7 +47,6 @@ return {
 			"marilari88/neotest-vitest",
 			"jfpedroza/neotest-elixir",
 			"kikito/inspect.lua",
-			"arthur944/neotest-bun",
 		},
 		opts = function(_, opts)
 			local is_mocha_test_file = M.create_test_file_extensions_matcher(
@@ -81,7 +80,6 @@ return {
 			}
 			opts.adapters["neotest-elixir"] = {}
 			opts.adapters["neotest-vitest"] = {}
-			opts.adapters["neotest-bun"] = {}
 
 			opts.status = {
 				enabled = true,
