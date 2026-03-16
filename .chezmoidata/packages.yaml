@@ -35,4 +35,5 @@ packages:
       - "another-redis-desktop-manager"
       - "ghostty"
       - "emdash"
+      - claude-code
   nix:
