@@ -10,7 +10,6 @@ packages:
       - "libdap"
       - "lua-language-server"
       - "neovim-remote"
-      - "vault"
       - "lazygit"
       - "gh"
       - "fish"
@@ -30,9 +29,7 @@ packages:
     casks:
       - "google-chrome"
       - "dbeaver-community"
-      - "google-cloud-sdk"
       - "rectangle"
-      - "another-redis-desktop-manager"
       - "ghostty"
       - "emdash"
       - claude-code
