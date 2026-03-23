@@ -13,6 +13,7 @@ Includes:
 
 - macOS (primary platform) or Linux
 - `curl` available in your shell
+- [Homebrew](https://brew.sh/) (macOS only)
 
 ## Installation
 
@@ -28,28 +29,6 @@ This command will:
 3. Run pre-install scripts (installs Nix, and Homebrew on macOS)
 4. Apply all dotfiles to your home directory
 5. Run post-apply scripts (installs mise tools)
-
-### 2. Install packages
-
-On macOS, install all Homebrew packages and casks:
-
-```sh
-chezmoi apply
-```
-
-The `run_onchange_darwin-install-packages.sh.tmpl` script will automatically install the following via Homebrew:
-
-**CLI tools:** git, mise, gawk, gpg, colima, fish, lua-language-server, neovim (HEAD), neovim-remote, lazygit, gh, k9s, ripgrep, diff-so-fancy, opencode, exercism, beads, tmux, dolt
-
-**GUI apps (casks):** Google Chrome, DBeaver Community, Rectangle, Ghostty, Emdash, Claude Code
-
-## What Gets Installed Automatically
-
-| Script | Trigger | Action |
-|--------|---------|--------|
-| `run_once_before_install-base-packages.sh.tmpl` | Once, before apply | Installs Nix; installs Homebrew on macOS |
-| `run_onchange_darwin-install-packages.sh.tmpl` | On change, macOS only | Installs/updates Homebrew packages and casks |
-| `run_after_apply.sh` | After every apply | Runs `mise install` to install all mise-managed tools |
 
 ## Updating
 
