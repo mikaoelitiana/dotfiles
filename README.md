@@ -13,7 +13,6 @@ Includes:
 
 - macOS (primary platform) or Linux
 - `curl` available in your shell
-- [Homebrew](https://brew.sh/) (macOS only)
 
 ## Installation
 
