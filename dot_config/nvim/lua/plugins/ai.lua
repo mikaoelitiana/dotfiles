@@ -11,6 +11,17 @@ return {
 						},
 					},
 				},
+				hooks = {
+					-- Automatically open files edited by opencode in Neovim buffers for real-time viewing
+					on_file_edited = function(file_path, edit_type)
+						local bufnr = vim.fn.bufnr(file_path)
+						if bufnr ~= -1 and vim.fn.bufloaded(bufnr) == 1 then
+							vim.cmd("buffer " .. bufnr)
+						else
+							vim.cmd("edit " .. vim.fn.fnameescape(file_path))
+						end
+					end,
+				},
 			})
 		end,
 		dependencies = {
