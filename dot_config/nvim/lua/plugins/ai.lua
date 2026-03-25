@@ -3,7 +3,7 @@ return {
 		"sudo-tee/opencode.nvim",
 		config = function()
 			require("opencode").setup({
-				keymap_prefix = "<leader>O",
+				keymap_prefix = "<leader>a",
 				ui = {
 					input = {
 						text = {
