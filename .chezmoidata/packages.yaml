@@ -32,5 +32,4 @@ packages:
       - "rectangle"
       - "ghostty"
       - "emdash"
-      - claude-code
   nix:
