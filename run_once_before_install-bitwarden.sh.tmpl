@@ -1,0 +1,9 @@
+#!/bin/sh
+{{ if eq .chezmoi.os "darwin" -}}
+# Install Bitwarden CLI if not already installed
+if ! command -v bw &> /dev/null
+then
+    echo "Installing Bitwarden CLI..."
+    brew install bitwarden-cli
+fi
+{{ end -}}

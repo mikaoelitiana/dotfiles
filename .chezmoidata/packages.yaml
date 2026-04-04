@@ -20,6 +20,7 @@ packages:
       - "beads"
       - "tmux"
       - "dolt"
+      - "bitwarden-cli"
     brews_with_args:
       neovim:
         name: "neovim"
