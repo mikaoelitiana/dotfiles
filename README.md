@@ -56,8 +56,12 @@ To view all current template data:
 chezmoi data
 ```
 
-To update your git email address after installation:
+To update your git email address after installation, edit the chezmoi configuration:
 ```sh
-chezmoi data set email "newemail@example.com"
+chezmoi edit-config
+```
+
+Then update the `email` value in the `[data]` section and apply the changes:
+```sh
 chezmoi apply
 ```
