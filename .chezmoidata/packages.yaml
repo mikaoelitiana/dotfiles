@@ -12,7 +12,6 @@ packages:
       - "neovim-remote"
       - "lazygit"
       - "gh"
-      - "fish"
       - "derailed/k9s/k9s"
       - "ripgrep"
       - "diff-so-fancy"

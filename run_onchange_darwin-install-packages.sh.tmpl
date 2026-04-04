@@ -6,8 +6,8 @@ brew bundle --file=/dev/stdin <<EOF
 brew {{ . | quote }}
 {{ end -}}
 
-{{ range .packages.darwin.brews_with_args -}}
-brew {{ .name | quote }}, args: [{{ .args | join "," | quote }}]
+{{- range $name, $config := .packages.darwin.brews_with_args }}
+brew {{ $config.name | quote }}, args: [{{ range $i, $arg := $config.args }}{{ if $i }}, {{ end }}{{ $arg | quote }}{{ end }}]
 {{ end -}}
 
 {{ range .packages.darwin.casks -}}
