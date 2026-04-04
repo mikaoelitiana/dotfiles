@@ -25,9 +25,10 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply mikaoelitiana
 This command will:
 1. Install chezmoi if not already present
 2. Clone this repository
-3. Run pre-install scripts (installs Nix, and Homebrew on macOS)
-4. Apply all dotfiles to your home directory
-5. Run post-apply scripts (installs mise tools)
+3. Prompt for configuration values (email address for git config)
+4. Run pre-install scripts (installs Nix, and Homebrew on macOS)
+5. Apply all dotfiles to your home directory
+6. Run post-apply scripts (installs mise tools)
 
 ## Updating
 
@@ -41,13 +42,22 @@ chezmoi update
 
 After the initial setup, you may want to:
 
-1. Configure Git identity (if not set via chezmoi template data):
-   ```sh
-   git config --global user.name "Your Name"
-   git config --global user.email "you@example.com"
-   ```
-
-2. Set your default shell to fish:
+1. Set your default shell to fish:
    ```sh
    chsh -s $(which fish)
    ```
+
+## Customization
+
+The git configuration is managed through `dot_gitconfig.tmpl` using [chezmoi's templating system](https://www.chezmoi.io/user-guide/templating/).
+
+To view all current template data:
+```sh
+chezmoi data
+```
+
+To update your git email address after installation:
+```sh
+chezmoi data set email "newemail@example.com"
+chezmoi apply
+```
