@@ -1,9 +1,16 @@
 #!/bin/sh
-{{ if eq .chezmoi.os "darwin" -}}
 # Install Bitwarden CLI if not already installed
 if ! command -v bw &> /dev/null
 then
     echo "Installing Bitwarden CLI..."
+    {{ if eq .chezmoi.os "darwin" -}}
     brew install bitwarden-cli
+    {{ else if eq .chezmoi.os "linux" -}}
+    # Download and install Bitwarden CLI for Linux
+    curl -L "https://vault.bitwarden.com/download/?app=cli&platform=linux" -o bw.zip
+    unzip bw.zip
+    chmod +x bw
+    sudo mv bw /usr/local/bin/
+    rm bw.zip
+    {{ end -}}
 fi
-{{ end -}}

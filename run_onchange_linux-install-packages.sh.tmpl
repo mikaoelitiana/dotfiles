@@ -1,0 +1,91 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+# Detect Linux distribution
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    echo "Cannot detect Linux distribution"
+    exit 1
+fi
+
+# Install packages based on distribution
+case "$OS" in
+    ubuntu|debian)
+        sudo apt-get update
+        {{ range .packages.linux.apt -}}
+        sudo apt-get install -y {{ . | quote }}
+        {{ end -}}
+        
+        # Install additional tools not in apt
+        # Install gh (GitHub CLI)
+        if ! command -v gh &> /dev/null; then
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install -y gh
+        fi
+        
+        # Install lazygit
+        if ! command -v lazygit &> /dev/null; then
+            LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+            curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+            tar xf lazygit.tar.gz lazygit
+            sudo install lazygit /usr/local/bin
+            rm lazygit lazygit.tar.gz
+        fi
+        
+        # Install mise
+        if ! command -v mise &> /dev/null; then
+            curl https://mise.run | sh
+        fi
+        
+        # Install k9s
+        if ! command -v k9s &> /dev/null; then
+            K9S_VERSION=$(curl -s "https://api.github.com/repos/derailed/k9s/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+            curl -Lo k9s.tar.gz "https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz"
+            tar xf k9s.tar.gz k9s
+            sudo install k9s /usr/local/bin
+            rm k9s k9s.tar.gz
+        fi
+        
+        # Install neovim-remote (via pip)
+        if ! command -v nvr &> /dev/null; then
+            pip3 install --user neovim-remote
+        fi
+        
+        # Install diff-so-fancy
+        if ! command -v diff-so-fancy &> /dev/null; then
+            sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -o /usr/local/bin/diff-so-fancy
+            sudo chmod +x /usr/local/bin/diff-so-fancy
+        fi
+        
+        # Install exercism
+        if ! command -v exercism &> /dev/null; then
+            EXERCISM_VERSION=$(curl -s "https://api.github.com/repos/exercism/cli/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+            curl -Lo exercism.tar.gz "https://github.com/exercism/cli/releases/latest/download/exercism-${EXERCISM_VERSION}-linux-x86_64.tar.gz"
+            tar xf exercism.tar.gz exercism
+            sudo install exercism /usr/local/bin
+            rm exercism exercism.tar.gz
+        fi
+        
+        # Install dolt
+        if ! command -v dolt &> /dev/null; then
+            sudo curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | sudo bash
+        fi
+        ;;
+    
+    fedora|rhel|centos)
+        {{ range .packages.linux.apt -}}
+        sudo dnf install -y {{ . | quote }}
+        {{ end -}}
+        ;;
+    
+    arch|manjaro)
+        {{ range .packages.linux.apt -}}
+        sudo pacman -S --noconfirm {{ . | quote }}
+        {{ end -}}
+        ;;
+esac
+{{ end -}}

@@ -32,4 +32,22 @@ packages:
       - "rectangle"
       - "ghostty"
       - "emdash"
+  linux:
+    apt:
+      - "git"
+      - "gawk"
+      - "gpg"
+      - "fish"
+      - "neovim"
+      - "ripgrep"
+      - "tmux"
+      - "curl"
+      - "wget"
+      - "build-essential"
+      - "libdap-dev"
+      - "lua-language-server"
+      - "python3-pip"
+      - "docker.io"
+      - "docker-compose"
+      - "unzip"
   nix:
