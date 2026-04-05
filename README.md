@@ -27,7 +27,7 @@ This command will:
 1. Install chezmoi if not already present
 2. Clone this repository
 3. Prompt for configuration values (email address for git config)
-4. Run pre-install scripts (installs Nix, Homebrew on macOS, or apt/dnf/pacman on Linux)
+4. Run pre-install scripts (installs Homebrew on macOS, or updates package managers on Linux)
 5. Apply all dotfiles to your home directory
 6. Install packages (via Homebrew on macOS, native package managers on Linux)
 7. Run post-apply scripts (installs mise tools)
@@ -83,7 +83,6 @@ Packages are defined in `.chezmoidata/packages.yaml`:
 - `packages.darwin.brews`: Homebrew packages for macOS
 - `packages.darwin.casks`: Homebrew casks (macOS apps)
 - `packages.linux.apt`: APT packages for Debian/Ubuntu
-- `packages.nix`: Nix packages (cross-platform)
 
 ### macOS-Specific Apps (Casks)
 

@@ -50,4 +50,3 @@ packages:
       - "docker.io"
       - "docker-compose"
       - "unzip"
-  nix:

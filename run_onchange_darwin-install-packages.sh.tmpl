@@ -17,7 +17,3 @@ cask {{ . | quote }}
 EOF
 {{ end -}}
 
-{{ range .packages.nix -}}
-nix-env -iA {{ . | quote }}
-{{ end -}}
-
