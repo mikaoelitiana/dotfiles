@@ -56,7 +56,10 @@ After the initial setup, you may want to:
 
 1. Set your default shell to fish:
    ```sh
-   chsh -s $(which fish)
+   # Add fish to the list of allowed shells
+   command -v fish | sudo tee -a /etc/shells
+   # Set fish as your default login shell
+   chsh -s "$(command -v fish)"
    ```
 
 ## Platform-Specific Behavior
