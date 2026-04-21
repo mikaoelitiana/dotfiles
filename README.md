@@ -14,6 +14,7 @@ Includes:
 - macOS or Linux (Ubuntu, Debian, Fedora, Arch)
 - `curl` available in your shell
 - `sudo` access (for Linux package installation)
+- `bash` available at `/bin/bash`
 
 ## Installation
 
@@ -23,14 +24,23 @@ Includes:
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply mikaoelitiana
 ```
 
-This command will:
-1. Install chezmoi if not already present
-2. Clone this repository
-3. Prompt for configuration values (email address for git config)
-4. Run pre-install scripts (installs Homebrew on macOS, or updates package managers on Linux)
-5. Apply all dotfiles to your home directory
-6. Install packages (via Homebrew on macOS, native package managers on Linux)
-7. Run post-apply scripts (installs mise tools)
+This single command will bootstrap your entire environment:
+
+1. **Install chezmoi** to `~/.local/bin/` (via the official `get.chezmoi.io` installer)
+2. **Clone** this dotfiles repository
+3. **Prompt** for configuration values (email address for git config)
+4. **Install Homebrew** on macOS if not already present (on Linux, updates the system package manager)
+5. **Install Bitwarden CLI** (via Homebrew on macOS, direct download on Linux)
+6. **Apply** all dotfiles to your home directory
+7. **Install packages** (via Homebrew on macOS, native package managers on Linux)
+8. **Install mise tools** (runtime versions for Node.js, Python, etc.)
+
+> **Note:** On Apple Silicon Macs, Homebrew installs to `/opt/homebrew/`. The setup scripts
+> automatically configure the PATH for this. After installation completes, open a new terminal
+> session to ensure all PATH changes take effect.
+>
+> chezmoi is also included as a Homebrew formula, so after the initial bootstrap it will be
+> managed and updated via Homebrew alongside all other packages.
 
 ## Updating
 

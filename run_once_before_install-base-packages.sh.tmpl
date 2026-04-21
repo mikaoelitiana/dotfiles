@@ -1,22 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 {{ if eq .chezmoi.os "darwin" -}}
-if ! command -v brew &> /dev/null
-then
+if ! command -v brew > /dev/null 2>&1; then
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+# Ensure Homebrew is on PATH (Apple Silicon installs to /opt/homebrew)
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
 {{ else if eq .chezmoi.os "linux" -}}
 # Ensure package manager is available and updated
-if command -v apt-get &> /dev/null
-then
+if command -v apt-get > /dev/null 2>&1; then
     echo "Updating apt package lists..."
     sudo apt-get update
-elif command -v dnf &> /dev/null
-then
+elif command -v dnf > /dev/null 2>&1; then
     echo "Updating dnf package lists..."
     sudo dnf check-update || true
-elif command -v pacman &> /dev/null
-then
+elif command -v pacman > /dev/null 2>&1; then
     echo "Updating pacman package lists..."
     sudo pacman -Sy
 fi
