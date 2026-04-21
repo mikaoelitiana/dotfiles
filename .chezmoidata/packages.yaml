@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
+      - "chezmoi"
       - "git"
       - "mise"
       - "gawk"
@@ -12,10 +13,10 @@ packages:
       - "neovim-remote"
       - "lazygit"
       - "gh"
-      - "derailed/k9s/k9s"
+      - "k9s"
       - "ripgrep"
       - "diff-so-fancy"
-      - "anomalyco/tap/opencode"
+      - "opencode"
       - "exercism"
       - "beads"
       - "tmux"
