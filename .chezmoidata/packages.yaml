@@ -24,6 +24,7 @@ packages:
       - "bitwarden-cli"
       - "zellij"
       - "mac-cleanup-go"
+      - "docker"
     brews_with_args:
       neovim:
         name: "neovim"
