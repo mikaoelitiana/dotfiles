@@ -6,7 +6,6 @@
 # Idempotency guard: skip if LazyVim is already bootstrapped (lazy-lock.json
 # is created by lazy.nvim after the first successful plugin sync).
 if [ -f "${HOME}/.config/nvim/lazy-lock.json" ]; then
-	echo "LazyVim already set up, skipping Neovim data cleanup."
 	exit 0
 fi
 
