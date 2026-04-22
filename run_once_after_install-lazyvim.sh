@@ -10,6 +10,12 @@ if ! command -v nvim >/dev/null 2>&1; then
 	exit 0
 fi
 
+# Idempotency guard: skip if lazy.nvim is already installed and plugins are synced.
+if [ -d "${HOME}/.local/share/nvim/lazy/lazy.nvim" ] && [ -f "${HOME}/.config/nvim/lazy-lock.json" ]; then
+	echo "LazyVim plugins already installed, skipping bootstrap."
+	exit 0
+fi
+
 echo "Bootstrapping LazyVim (headless plugin install)..."
 nvim --headless "+Lazy! sync" +qa
 
