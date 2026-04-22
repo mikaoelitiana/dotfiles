@@ -23,6 +23,7 @@ packages:
       - "dolt"
       - "bitwarden-cli"
       - "zellij"
+      - "mac-cleanup-go"
     brews_with_args:
       neovim:
         name: "neovim"
