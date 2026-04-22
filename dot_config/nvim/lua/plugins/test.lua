@@ -45,7 +45,6 @@ return {
 			"nvim-treesitter/nvim-treesitter", -- should fix https://github.com/nvim-neotest/neotest-jest/issues/85
 			"nvim-neotest/neotest-jest",
 			"marilari88/neotest-vitest",
-			"jfpedroza/neotest-elixir",
 			"kikito/inspect.lua",
 		},
 		opts = function(_, opts)
@@ -78,7 +77,6 @@ return {
 				end,
 				is_test_file = neotest_mocha_is_test_file ~= nil and neotest_mocha_is_test_file or is_mocha_test_file,
 			}
-			opts.adapters["neotest-elixir"] = {}
 			opts.adapters["neotest-vitest"] = {}
 
 			opts.status = {
