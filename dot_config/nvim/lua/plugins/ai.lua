@@ -21,4 +21,17 @@ return {
 			},
 		},
 	},
+	{
+		"yetone/avante.nvim",
+		opts = {
+			mode = "agentic",
+			provider = "symbiotic",
+			acp_providers = {
+				["symbiotic"] = {
+					command = "symbiotic",
+					args = { "acp" },
+				},
+			},
+		},
+	},
 }
