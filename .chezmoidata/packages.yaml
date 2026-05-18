@@ -25,6 +25,7 @@ packages:
       - "zellij"
       - "mac-cleanup-go"
       - "docker"
+      - "jj"
     brews_with_args:
       neovim:
         name: "neovim"
