@@ -9,11 +9,6 @@
       "command": ["npx", "chrome-devtools-mcp@latest"],
       "enabled": true,
     },
-    "xcode": {
-      "type": "local",
-      "command": ["xcrun", "mcpbridge"],
-      "enabled": true,
-    },
   },
   "provider": {
     "lmstudio": {
