@@ -1,0 +1,6 @@
+[".config/symbiotic/skills"]
+    type = "git-repo"
+    url = "git@github.com:SymbioticSec/private-skills.git"
+    refreshPeriod = "168h"
+    [".config/symbiotic/skills".pull]
+        args = ["--ff-only"]
