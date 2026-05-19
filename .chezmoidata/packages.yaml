@@ -26,6 +26,7 @@ packages:
       - "mac-cleanup-go"
       - "docker"
       - "jj"
+      - "lazyjj"
     brews_with_args:
       neovim:
         name: "neovim"
