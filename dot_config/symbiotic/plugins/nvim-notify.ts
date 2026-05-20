@@ -12,9 +12,10 @@ import { dirname } from "path";
 
 /**
  * Determines the first edited line in a file by parsing `git diff` output.
- * Falls back to line 1 if the file is untracked, binary, or diff is empty.
+ * Returns null for binary files (skip opening), or line 1 as fallback for
+ * untracked files / empty diffs.
  */
-function getFirstEditedLine(filePath: string): Promise<number> {
+function getFirstEditedLine(filePath: string): Promise<number | null> {
   return new Promise((resolve) => {
     execFile(
       "git",
@@ -23,6 +24,11 @@ function getFirstEditedLine(filePath: string): Promise<number> {
       (err, stdout) => {
         if (err || !stdout) {
           resolve(1);
+          return;
+        }
+        // git diff reports "Binary files ... differ" for binary content
+        if (/^Binary files .* differ$/m.test(stdout)) {
+          resolve(null);
           return;
         }
         // Parse the first @@ hunk header: @@ -old[,count] +new[,count] @@
@@ -84,6 +90,10 @@ export const NvimNotifyPlugin: Plugin = async ({ client }) => {
 
       try {
         const line = await getFirstEditedLine(filePath);
+        if (line === null) {
+          // Binary file – skip opening in Neovim
+          return;
+        }
         await openFileInNvim(socket, filePath, line);
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : String(err);
