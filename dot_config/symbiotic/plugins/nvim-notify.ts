@@ -1,5 +1,6 @@
 import type { Plugin } from "@symbioticsec/plugin";
-import { spawn } from "child_process";
+import { execFile, spawn } from "child_process";
+import { dirname } from "path";
 
 /**
  * nvim-notify plugin for Symbiotic Code
@@ -9,7 +10,34 @@ import { spawn } from "child_process";
  * Symbiotic Code inside a Neovim :terminal).
  */
 
-function openFileInNvim(socket: string, filePath: string): Promise<void> {
+/**
+ * Determines the first edited line in a file by parsing `git diff` output.
+ * Falls back to line 1 if the file is untracked, binary, or diff is empty.
+ */
+function getFirstEditedLine(filePath: string): Promise<number> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      ["diff", "--unified=0", "--no-color", "--", filePath],
+      { cwd: dirname(filePath) },
+      (err, stdout) => {
+        if (err || !stdout) {
+          resolve(1);
+          return;
+        }
+        // Parse the first @@ hunk header: @@ -old[,count] +new[,count] @@
+        const match = stdout.match(/@@ -\d+(?:,\d+)? \+(\d+)/);
+        if (match) {
+          resolve(Math.max(1, parseInt(match[1], 10)));
+        } else {
+          resolve(1);
+        }
+      },
+    );
+  });
+}
+
+function openFileInNvim(socket: string, filePath: string, line: number = 1): Promise<void> {
   return new Promise((resolve, reject) => {
     // Open the file in the first non-terminal window to avoid hijacking
     // the terminal running Symbiotic Code.
@@ -17,7 +45,8 @@ function openFileInNvim(socket: string, filePath: string): Promise<void> {
     const escaped = filePath.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
     // Load the buffer in the first non-terminal window without switching focus.
     // Save/restore the current window so the terminal stays active.
-    const lua = `lua local cur=vim.api.nvim_get_current_win() for _,w in ipairs(vim.api.nvim_list_wins()) do if vim.bo[vim.api.nvim_win_get_buf(w)].buftype ~= 'terminal' then vim.api.nvim_win_set_buf(w,vim.fn.bufadd('${escaped}')) vim.bo[vim.fn.bufadd('${escaped}')].buflisted=true return end end vim.cmd('vsplit '..vim.fn.fnameescape('${escaped}')) vim.api.nvim_set_current_win(cur)`;
+    // Position the cursor on the first edited line.
+    const lua = `lua local cur=vim.api.nvim_get_current_win() local line=${line} for _,w in ipairs(vim.api.nvim_list_wins()) do if vim.bo[vim.api.nvim_win_get_buf(w)].buftype ~= 'terminal' then local buf=vim.fn.bufadd('${escaped}') vim.api.nvim_win_set_buf(w,buf) vim.bo[buf].buflisted=true vim.api.nvim_win_set_cursor(w,{math.min(line,math.max(1,vim.api.nvim_buf_line_count(buf))),0}) return end end vim.cmd('vsplit '..vim.fn.fnameescape('${escaped}')) local w=vim.api.nvim_get_current_win() local buf=vim.api.nvim_win_get_buf(w) vim.api.nvim_win_set_cursor(w,{math.min(line,math.max(1,vim.api.nvim_buf_line_count(buf))),0}) vim.api.nvim_set_current_win(cur)`;
 
     const proc = spawn(
       "nvim",
@@ -54,7 +83,8 @@ export const NvimNotifyPlugin: Plugin = async ({ client }) => {
       const filePath = event.properties.file;
 
       try {
-        await openFileInNvim(socket, filePath);
+        const line = await getFirstEditedLine(filePath);
+        await openFileInNvim(socket, filePath, line);
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : String(err);
         await client.app.log({
