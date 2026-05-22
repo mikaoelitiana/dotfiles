@@ -1,27 +1,24 @@
 local wk = require("which-key")
-wk.add({
-	{
-		"<leader>",
-		group = "buffers",
-		-- create a dynamic list of buffers
-		-- for use as bufferline shortcuts
-		expand = function()
-			local ret = {}
 
-			for buf = 1, 9, 1 do
-				ret[#ret + 1] = {
-					"" .. buf,
-					function()
-						require("bufferline").go_to(buf, true)
-					end,
-					desc = "Jump to buffer " .. buf,
-					icon = { cat = "file" },
-				}
-			end
-			return ret
+-- Register buffer jump mappings directly (not via expand)
+-- so that `hidden = true` is properly respected by tree:fix()
+local buffer_mappings = {
+	{ "<leader>", group = "buffers" },
+}
+for buf = 1, 9, 1 do
+	buffer_mappings[#buffer_mappings + 1] = {
+		"<leader>" .. buf,
+		function()
+			require("bufferline").go_to(buf, true)
 		end,
-	},
-})
+		desc = "Jump to buffer " .. buf,
+		icon = { cat = "file" },
+		hidden = true,
+	}
+end
+buffer_mappings[#buffer_mappings + 1] = { "<leader>*", desc = "Jump to buffer [1-9]", icon = { cat = "file" } }
+
+wk.add(buffer_mappings)
 
 return {
 	{
