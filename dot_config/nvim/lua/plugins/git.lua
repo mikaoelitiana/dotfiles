@@ -47,6 +47,24 @@ return {
           end
         end
 
+        -- Run mise trust if a mise config is present
+        local mise_files = { ".mise.toml", ".mise.local.toml", "mise.toml", ".tool-versions" }
+        for _, file in ipairs(mise_files) do
+          if vim.fn.filereadable(path .. "/" .. file) == 1 then
+            vim.fn.jobstart({ "mise", "trust", "--all" }, {
+              cwd = path,
+              on_exit = function(_, code)
+                if code == 0 then
+                  vim.schedule(function()
+                    vim.notify("Ran mise trust in new worktree", vim.log.levels.INFO)
+                  end)
+                end
+              end,
+            })
+            break
+          end
+        end
+
         -- Detect package manager and run install
         local install_cmd = nil
         if vim.fn.filereadable(path .. "/bun.lockb") == 1 or vim.fn.filereadable(path .. "/bun.lock") == 1 then
