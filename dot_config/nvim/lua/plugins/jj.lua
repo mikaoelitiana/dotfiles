@@ -1,9 +1,15 @@
+local wk = require("which-key")
+
+wk.add({
+	{ "<leader>J", group = "+jujutsu" },
+})
+
 return {
 	{
 		"swaits/lazyjj.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		opts = {
-			mapping = "<leader>jj",
+			mapping = "<leader>JJ",
 		},
 	},
 	{
