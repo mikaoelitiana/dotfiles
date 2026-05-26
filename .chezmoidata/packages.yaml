@@ -37,7 +37,6 @@ packages:
       - "dbeaver-community"
       - "rectangle"
       - "ghostty"
-      - "emdash"
   linux:
     apt:
       - "git"
