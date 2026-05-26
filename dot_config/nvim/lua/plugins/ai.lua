@@ -7,6 +7,11 @@ return {
 					enabled = true,
 					backend = "zellij",
 				},
+				win = {
+					keys = {
+						prompt = { "<c-y>", "prompt", mode = "t", desc = "insert prompt or context" },
+					},
+				},
 				tools = {
 					symbiotic = {
 						cmd = { "symbiotic" },
