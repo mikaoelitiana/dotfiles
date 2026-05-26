@@ -21,7 +21,6 @@ packages:
       - "beads"
       - "tmux"
       - "dolt"
-      - "bitwarden-cli"
       - "zellij"
       - "mac-cleanup-go"
       - "docker"
