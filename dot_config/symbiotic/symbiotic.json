@@ -27,7 +27,4 @@
     }
   },
   "plugin": ["opencode-beads"],
-  "keybinds": {
-    "command_list": "ctrl+y"
-  }
 }
