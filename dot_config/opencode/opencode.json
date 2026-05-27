@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
+  "theme": "catppuccin",
   "autoupdate": true,
   "mcp": {
     "playwright": {
@@ -30,7 +30,7 @@
       "options": {
         "baseURL": "http://127.0.0.1:11434/v1"
       }
-    } 
+    },
     "ollama-cloud": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama Cloud",
