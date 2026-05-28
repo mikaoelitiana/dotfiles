@@ -1,0 +1,60 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "bindings": {
+      "space": null, // Disable the default action vim::WrappingRight
+    },
+  },
+  {
+    "context": "VimControl && vim_mode == normal",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space w": "pane::CloseActiveItem",
+      "space o": "outline::Toggle",
+      "space g b": "git::Branch",
+      "space t": "terminal_panel::ToggleFocus",
+      "space g g": "git_panel::ToggleFocus",
+      "space /": "pane::DeploySearch",
+      "escape escape": "workspace::Save",
+      "shift-u": "vim::Redo",
+      "space h": "editor::ToggleInlayHints",
+      "space e": "pane::RevealInProjectPanel",
+      "ctrl-a": "editor::ToggleCodeActions",
+      "] f": "vim::NextMethodStart",
+      "[ f": "vim::PreviousMethodStart",
+      "space f o": "workspace::Open", // open a project in a new window
+      "space f s": "workspace::Save", // save file
+      "space f p": "file_finder::Toggle", // find project files
+      "space b b": "tab_switcher::Toggle", // switch to another open file
+      "space b l": "pane::AlternateFile", // switch to last focused buffer
+      "space s p": "workspace::NewSearch", // search the current project
+      "space a c": "agent::ToggleFocus", // open assistant chat
+      "space p s": "project_panel::ToggleFocus", // open project structure
+      "space s v": "outline::Toggle", // find variables in the current file
+      "space w s": "pane::SplitDown", // split window horizontally
+      "space w v": "pane::SplitRight", // split window vertically
+      "space w m m": "workspace::ToggleZoom", // maximize current buffer
+      "space t t": "terminal_panel::ToggleFocus", // open terminal
+      "space w d": "pane::CloseActiveItem", // close current window
+      "space s s": "buffer_search::Deploy", // search current buffer
+    },
+  },
+]
