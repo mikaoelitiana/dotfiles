@@ -69,10 +69,6 @@ return {
 		end,
 	},
 	{
-		"microsoft/vscode-js-debug",
-		build = "git checkout . && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out && git checkout package-lock.json",
-	},
-	{
 		"mfussenegger/nvim-dap",
 		opts = function()
 			local dap = require("dap")
