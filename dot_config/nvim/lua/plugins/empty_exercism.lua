@@ -1,11 +1,17 @@
+local wk = require("which-key")
+
+wk.add({
+	{ "<leader>z", group = "+exercism" },
+})
+
 return {
 	{
 		"2kabhishek/exercism.nvim",
 		cmd = { "Exercism" },
 		keys = {
-			{ "<leader>exa", desc = "Exercism select language" },
-			{ "<leader>exl", desc = "Exercism select exercice" },
-			{ "<leader>exr", desc = "Exercism recent exercices" },
+			{ "<leader>za", "<cmd>Exercism languages<cr>", desc = "Select language" },
+			{ "<leader>zr", "<cmd>Exercism recent<cr>", desc = "Recent exercises" },
+			{ "<leader>zt", "<cmd>Exercism test<cr>", desc = "Run tests" },
 		}, -- add your preferred keybindings
 		dependencies = {
 			"2kabhishek/utils.nvim", -- required, for utility functions
