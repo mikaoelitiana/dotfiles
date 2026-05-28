@@ -26,6 +26,7 @@ packages:
       - "docker"
       - "jj"
       - "lazyjj"
+      - "rtk"
     brews_with_args:
       neovim:
         name: "neovim"
