@@ -25,15 +25,19 @@ for _, language in ipairs({ "javascript", "typescript" }) do
 			env = { NODE_ENV = "local" },
 		},
 		{
+			-- NOTE: Bun uses WebKit Inspector Protocol (not V8/CDP).
+			-- No stable DAP adapter exists yet. This runs the file with bun --inspect
+			-- and prints the debug.bun.sh URL to open in a browser.
+			-- For breakpoint debugging, prefer "Run file with tsx" instead.
 			type = "node",
 			request = "launch",
-			name = "Run file with bun",
+			name = "Run file with bun (web debugger)",
 			cwd = "${workspaceFolder}",
-			runtimeArgs = { "run" },
 			runtimeExecutable = "bun",
-			args = { "--inspect", "${file}" },
-			skipFiles = { "node_modules/**" },
+			runtimeArgs = { "--inspect-wait" },
+			args = { "${file}" },
 			console = "integratedTerminal",
+			autoAttachChildProcesses = false,
 		},
 		{
 			type = "node",
