@@ -26,4 +26,17 @@ return {
 			},
 		},
 	},
+	{
+		"carlos-algms/agentic.nvim",
+		opts = {
+			provider = "symbiotic",
+			acp_providers = {
+				["symbiotic"] = {
+					name = "symbiotic",
+					command = "symbiotic",
+					args = { "acp" },
+				},
+			},
+		},
+	},
 }
