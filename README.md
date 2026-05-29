@@ -3,6 +3,7 @@
 Personal development environment configuration managed by [chezmoi](https://www.chezmoi.io/).
 
 Includes:
+
 - Shell configurations (bash, zsh) with mise
 - Git configuration and templates
 - Neovim editor setup
@@ -55,6 +56,7 @@ chezmoi update
 After the initial setup, you may want to:
 
 1. Set your default shell to fish:
+
    ```sh
    # Add fish to the list of allowed shells
    command -v fish | sudo tee -a /etc/shells
@@ -76,16 +78,19 @@ Cross-platform configs (lazygit, k9s, neovim, fish) are stored in `~/.config` an
 The git configuration is managed through `dot_gitconfig.tmpl` using [chezmoi's templating system](https://www.chezmoi.io/user-guide/templating/).
 
 To view all current template data:
+
 ```sh
 chezmoi data
 ```
 
 To update your git email address after installation, edit the chezmoi configuration:
+
 ```sh
 chezmoi edit-config
 ```
 
 Then update the `email` value in the `[data]` section and apply the changes:
+
 ```sh
 chezmoi apply
 ```
@@ -93,6 +98,7 @@ chezmoi apply
 ## Managing Packages
 
 Packages are defined in `.chezmoidata/packages.yaml`:
+
 - `packages.darwin.brews`: Homebrew packages for macOS
 - `packages.darwin.casks`: Homebrew casks (macOS apps)
 - `packages.linux.apt`: APT packages for Debian/Ubuntu
@@ -100,15 +106,16 @@ Packages are defined in `.chezmoidata/packages.yaml`:
 ### macOS-Specific Apps (Casks)
 
 Some macOS apps don't have direct Linux equivalents and need to be installed separately:
+
 - **Rectangle** (window manager) → Linux: `i3`, `sway`, or built-in window manager
 - **Ghostty** (terminal) → May work on Linux if built from source
-- **Emdash** → macOS-only
 - **DBeaver** → Available for Linux via `.deb` or Flatpak
 - **Google Chrome** → Available for Linux via `.deb` download
 
 ### Tools Installed via Script on Linux
 
 The following tools are automatically installed via `run_onchange_linux-install-packages.sh.tmpl`:
+
 - gh (GitHub CLI)
 - lazygit
 - mise
