@@ -72,7 +72,7 @@ return {
 				end,
 				env = neotest_mocha_env ~= nil and neotest_mocha_env
 					or { CI = true, TS_NODE_FILES = "true", TS_NODE_TRANSPILE_ONLY = "true", NODE_ENV = "test" },
-				cwd = function(path)
+				cwd = function()
 					return vim.fn.getcwd()
 				end,
 				is_test_file = neotest_mocha_is_test_file ~= nil and neotest_mocha_is_test_file or is_mocha_test_file,
