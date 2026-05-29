@@ -9,14 +9,7 @@ return {
 		"carlos-algms/agentic.nvim",
 		lazy = true,
 		opts = {
-			provider = "symbiotic",
-			acp_providers = {
-				["symbiotic"] = {
-					name = "symbiotic",
-					command = "symbiotic",
-					args = { "acp" },
-				},
-			},
+			provider = "opencode-acp",
 		},
 		init = function()
 			-- Map agentic.nvim highlight groups to the active catppuccin flavour.
