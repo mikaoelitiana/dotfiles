@@ -1,0 +1,9 @@
+{
+    "diagnostics.globals": [
+        "Neotest_jest_command",
+        "Neotest_jest_env",
+        "neotest_mocha_command_args",
+        "neotest_mocha_env",
+        "neotest_mocha_is_test_file"
+    ]
+}
