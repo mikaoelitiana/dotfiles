@@ -27,6 +27,7 @@ packages:
       - "jj"
       - "lazyjj"
       - "rtk"
+      - "mistral-vibe"
     brews_with_args:
       neovim:
         name: "neovim"
