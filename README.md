@@ -77,6 +77,26 @@ Cross-platform configs (lazygit, k9s, neovim, fish) are stored in `~/.config` an
 
 The git configuration is managed through `dot_gitconfig.tmpl` using [chezmoi's templating system](https://www.chezmoi.io/user-guide/templating/).
 
+### Chezmoi Data Reference
+
+The following keys can be set under `[data]` in your chezmoi config (`chezmoi edit-config`) to customize behaviour:
+
+| Key | Description | Default |
+|-----|-------------|---------|
+| `data.neovim.agenticProvider` | ACP provider used by [agentic.nvim](https://github.com/carlos-algms/agentic.nvim) | `opencode-acp` |
+
+Built-in provider values: `claude-agent-acp`, `gemini-acp`, `codex-acp`, `opencode-acp`, `cursor-acp`, `copilot-acp`, `auggie-acp`, `mistral-vibe-acp`, `cline-acp`, `goose-acp`, `kiro-acp`, `pi-acp`.
+
+Example `~/.config/chezmoi/chezmoi.toml`:
+
+```toml
+[data]
+  email = "you@example.com"
+
+[data.neovim]
+  agenticProvider = "claude-agent-acp"
+```
+
 To view all current template data:
 
 ```sh

@@ -9,7 +9,7 @@ return {
 		"carlos-algms/agentic.nvim",
 		lazy = true,
 		opts = {
-			provider = "opencode-acp",
+			provider = "{{ dig "neovim" "agenticProvider" "opencode-acp" . }}",
 		},
 		init = function()
 			-- Map agentic.nvim highlight groups to the active catppuccin flavour.
