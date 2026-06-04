@@ -7,12 +7,14 @@
      },
      "chrome-devtools": {
        "type": "local",
-       "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+       "command": "npx",
+       "args": ["-y", "chrome-devtools-mcp@latest"],
        "enabled": false
      },
      "playwright": {
        "type": "local",
-       "command": ["npx", "-y", "@playwright/mcp@latest", "--extension"],
+       "command": "npx",
+       "args": ["-y", "@playwright/mcp@latest", "--extension"],
        "enabled": false,
        "environment": {
          "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
