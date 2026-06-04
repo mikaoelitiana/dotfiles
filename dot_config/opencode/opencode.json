@@ -1,50 +1,64 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "theme": "catppuccin",
-  "autoupdate": true,
-  "mcp": {
-    "playwright": {
-      "type": "local",
-      "command": ["npx", "chrome-devtools-mcp@latest"],
-      "enabled": false,
-    },
-  },
-  "provider": {
-    "ollama": {
-      "models": {
-        "gemma4": {
-          "_launch": true,
-          "name": "gemma4"
-        },
-        "gemma4:26b": {
-          "_launch": true,
-          "name": "gemma4:26b"
-        },
-        "qwen3.6:35b-a3b-coding-nvfp4": {
-          "_launch": true,
-          "name": "qwen3.6:35b-a3b-coding-nvfp4"
-        },
-      },
-      "name": "Ollama",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://127.0.0.1:11434/v1"
-      }
-    },
-    "ollama-cloud": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama Cloud",
-      "options": {
-        "baseURL": "https://ollama.com/v1"
-      },
-      "models": {
-        "glm-4.7:cloud": {
-          "name": "glm-4.7:cloud"
-        },
-        "gemma4:31b-cloud": {
-          "name": "gemma4:31b-cloud"
-        }
-      }
-    }
-  }
-}
+   "$schema": "https://opencode.ai/config.json",
+   "theme": "catppuccin",
+   "autoupdate": true,
+   "mcp": {
+     "notion": {
+       "type": "remote",
+       "url": "https://mcp.notion.com/mcp",
+       "enabled": false
+     },
+     "chrome-devtools": {
+       "type": "local",
+       "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+       "enabled": false
+     },
+     "playwright": {
+       "type": "local",
+       "command": ["npx", "-y", "@playwright/mcp@latest", "--extension"],
+       "enabled": false,
+       "environment": {
+         "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
+           "w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ"
+       }
+     }
+   },
+   "provider": {
+     "ollama": {
+       "models": {
+         "gemma4": {
+           "_launch": true,
+           "name": "gemma4"
+         },
+         "gemma4:26b": {
+           "_launch": true,
+           "name": "gemma4:26b"
+         },
+         "qwen3.6:35b-a3b-coding-nvfp4": {
+           "_launch": true,
+           "name": "qwen3.6:35b-a3b-coding-nvfp4"
+         },
+       },
+       "name": "Ollama",
+       "npm": "@ai-sdk/openai-compatible",
+       "options": {
+         "baseURL": "http://127.0.0.1:11434/v1"
+       }
+     },
+     "ollama-cloud": {
+       "npm": "@ai-sdk/openai-compatible",
+       "name": "Ollama Cloud",
+       "options": {
+         "baseURL": "https://ollama.com/v1"
+       },
+       "models": {
+         "glm-4.7:cloud": {
+           "name": "glm-4.7:cloud"
+         },
+         "gemma4:31b-cloud": {
+           "name": "gemma4:31b-cloud"
+         }
+       }
+     }
+   }
+ }
