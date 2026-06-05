@@ -23,6 +23,7 @@
        }
      },
     "open-pencil": {
+      "enabled": false,
       "command": "openpencil-mcp"
     }
    },
@@ -39,16 +40,29 @@
          },
          "qwen3.6:35b-a3b-coding-nvfp4": {
            "_launch": true,
-           "name": "qwen3.6:35b-a3b-coding-nvfp4"
-         },
-       },
+            "name": "qwen3.6:35b-a3b-coding-nvfp4"
+          }
+        },
        "name": "Ollama",
        "npm": "@ai-sdk/openai-compatible",
        "options": {
          "baseURL": "http://127.0.0.1:11434/v1"
        }
      },
-     "ollama-cloud": {
+      "lmstudio": {
+        "name": "LM Studio",
+        "npm": "@ai-sdk/openai-compatible",
+        "options": {
+          "baseURL": "http://127.0.0.1:1234/v1"
+        },
+        "models": {
+          "gemma-4-12b": {
+            "_launch": false,
+            "name": "google/gemma-4-12b"
+          }
+        }
+      },
+      "ollama-cloud": {
        "npm": "@ai-sdk/openai-compatible",
        "name": "Ollama Cloud",
        "options": {
