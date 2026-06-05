@@ -16,6 +16,7 @@ Includes:
 - `curl` available in your shell
 - `sudo` access (for Linux package installation)
 - `bash` available at `/bin/bash`
+- A [GitHub personal access token](https://github.com/settings/tokens) stored in your system keychain (see [Manual Steps](#manual-steps) below)
 
 ## Installation
 
@@ -29,12 +30,11 @@ This single command will bootstrap your entire environment:
 
 1. **Install chezmoi** to `~/.local/bin/` (via the official `get.chezmoi.io` installer)
 2. **Clone** this dotfiles repository
-3. **Prompt** for configuration values (email address for git config)
+3. **Prompt** for your email address and preferred ACP provider (stored in chezmoi config for git, jj, and neovim templates)
 4. **Install Homebrew** on macOS if not already present (on Linux, updates the system package manager)
-5. **Install Bitwarden CLI** (via Homebrew on macOS, direct download on Linux)
-6. **Apply** all dotfiles to your home directory
-7. **Install packages** (via Homebrew on macOS, native package managers on Linux)
-8. **Install mise tools** (runtime versions for Node.js, Python, etc.)
+5. **Apply** all dotfiles to your home directory
+6. **Install packages** (via Homebrew on macOS, native package managers on Linux)
+7. **Install mise tools** (runtime versions for Node.js, Python, etc.)
 
 > **Note:** On Apple Silicon Macs, Homebrew installs to `/opt/homebrew/`. The setup scripts
 > automatically configure the PATH for this. After installation completes, open a new terminal
@@ -53,16 +53,29 @@ chezmoi update
 
 ## Manual Steps
 
-After the initial setup, you may want to:
+### 1. Store your GitHub token in the system keychain
 
-1. Set your default shell to fish:
+Some templates use a GitHub PAT from the system keychain via chezmoi's
+`keyring` function. Store yours before running `chezmoi apply`:
 
-   ```sh
-   # Add fish to the list of allowed shells
-   command -v fish | sudo tee -a /etc/shells
-   # Set fish as your default login shell
-   chsh -s "$(command -v fish)"
-   ```
+```sh
+gh auth token | security add-generic-password -a "$(gh api user --jq .login)" -s github -w -U
+```
+
+This copies your existing `gh` auth token into the macOS Keychain. Verify:
+
+```sh
+security find-generic-password -a "$(gh api user --jq .login)" -s github -w
+```
+
+### 2. Set your default shell to fish
+
+```sh
+# Add fish to the list of allowed shells
+command -v fish | sudo tee -a /etc/shells
+# Set fish as your default login shell
+chsh -s "$(command -v fish)"
+```
 
 ## Platform-Specific Behavior
 
@@ -84,6 +97,7 @@ The following keys can be set under `[data]` in your chezmoi config (`chezmoi ed
 | Key | Description | Default |
 |-----|-------------|---------|
 | `data.neovim.agenticProvider` | ACP provider used by [agentic.nvim](https://github.com/carlos-algms/agentic.nvim) | `opencode-acp` |
+| `keyring("github", "<user>")` | GitHub PAT used by LM Studio MCP and other integrations. Stored in system keychain via `security add-generic-password`. | — |
 
 Built-in provider values: `claude-agent-acp`, `gemini-acp`, `codex-acp`, `opencode-acp`, `cursor-acp`, `copilot-acp`, `auggie-acp`, `mistral-vibe-acp`, `cline-acp`, `goose-acp`, `kiro-acp`, `pi-acp`.
 

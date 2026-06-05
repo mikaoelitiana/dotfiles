@@ -1,0 +1,8 @@
+{{ $email := promptStringOnce . "email" "What is your email address" -}}
+{{ $agenticProvider := promptChoiceOnce . "neovim.agenticProvider" "Which ACP provider do you want to use" (list "claude-agent-acp" "gemini-acp" "codex-acp" "opencode-acp" "cursor-acp" "copilot-acp" "auggie-acp" "mistral-vibe-acp" "cline-acp" "goose-acp" "kiro-acp" "pi-acp") -}}
+
+[data]
+  email = {{ $email | quote }}
+
+[data.neovim]
+  agenticProvider = {{ $agenticProvider | quote }}
