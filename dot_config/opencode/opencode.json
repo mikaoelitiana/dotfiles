@@ -21,7 +21,10 @@
          "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
            "w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ"
        }
-     }
+     },
+    "open-pencil": {
+      "command": "openpencil-mcp"
+    }
    },
    "provider": {
      "ollama": {
