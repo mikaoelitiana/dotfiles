@@ -59,7 +59,7 @@ Some templates use a GitHub PAT from the system keychain via chezmoi's
 `keyring` function. Store yours before running `chezmoi apply`:
 
 ```sh
-gh auth token | security add-generic-password -a "$(gh api user --jq .login)" -s github -w -U
+security add-generic-password -a "$(gh api user --jq .login)" -s github -U -w "$(gh auth token)"
 ```
 
 This copies your existing `gh` auth token into the macOS Keychain. Verify:
