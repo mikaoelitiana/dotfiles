@@ -59,6 +59,10 @@
           "gemma-4-12b": {
             "_launch": false,
             "name": "google/gemma-4-12b"
+          },
+          "gemma-4-26b-a4b-qat": {
+            "_launch": false,
+            "name": "google/gemma-4-26b-a4b-qat"
           }
         }
       },
