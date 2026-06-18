@@ -191,6 +191,13 @@ return {
 					},
 				},
 			},
+			gh_diff = {
+				auto_close = false,
+				layout = {
+					preset = "right",
+					hidden = { "preview" },
+				},
+			},
 		},
 	},
 }
