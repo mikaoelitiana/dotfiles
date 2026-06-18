@@ -1,5 +1,6 @@
 {
    "$schema": "https://opencode.ai/config.json",
+   "model": "lmstudio/gemma-4-26b-a4b-qat",
    "theme": "catppuccin",
    "autoupdate": true,
    "mcp": {
