@@ -26,6 +26,16 @@
     "open-pencil": {
       "enabled": false,
       "command": "openpencil-mcp"
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "serena",
+        "start-mcp-server",
+        "--context=ide",
+        "--project-from-cwd"
+      ],
+      "enabled": true
     }
    },
    "provider": {
