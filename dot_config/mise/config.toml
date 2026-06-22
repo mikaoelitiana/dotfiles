@@ -10,5 +10,4 @@ erlang = "latest"
 elixir = "latest"
 "npm:@agentclientprotocol/claude-agent-acp" = "latest"
 python = "3.13"
-"pipx:serena-agent" = { version = "latest", args = ["--python", "3.13"] }
-
+"pipx:serena-agent" = "latest"
