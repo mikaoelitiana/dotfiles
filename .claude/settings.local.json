@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api *)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -sL https://raw.githubusercontent.com/chancez/dotfiles/master/neovim/.config/nvim/lua/plugins/ai.lua)"
+    ]
+  }
+}
