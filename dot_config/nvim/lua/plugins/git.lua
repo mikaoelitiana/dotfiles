@@ -7,7 +7,7 @@ wk.add({
 return {
 	{
 		"ruifm/gitlinker.nvim",
-		depedencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
 			{
 				"<leader>gy",
