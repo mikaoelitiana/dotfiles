@@ -4,6 +4,61 @@ wk.add({
 	{ "<leader>a", group = "+ai" },
 })
 
+-- Toggle a full-width "focus" layout on demand without changing the persistent
+-- default (40% right sidebar). agentic reads Config.windows.width live on every
+-- re-layout, so mutating it and re-opening is enough. We capture whatever the
+-- configured default is on first use so a custom width would be respected too.
+local default_width
+local focus_on = false
+local focus_reopen_neotree = false
+
+local function neotree_is_open()
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "neo-tree" then
+			return true
+		end
+	end
+	return false
+end
+
+local function toggle_focus_width()
+	local cfg = require("agentic.config")
+	local agentic = require("agentic")
+	if default_width == nil then
+		default_width = cfg.windows.width
+	end
+
+	if not focus_on then
+		focus_on = true
+		cfg.windows.width = "100%"
+		-- Hide neo-tree so the chat is genuinely full width. Remember whether it
+		-- was open so we only bring it back on exit if it was showing before.
+		focus_reopen_neotree = neotree_is_open()
+		if focus_reopen_neotree then
+			vim.cmd("Neotree close")
+		end
+	else
+		focus_on = false
+		cfg.windows.width = default_width
+	end
+
+	-- close() only hides the widget (session/chat are preserved); reopening
+	-- redraws the layout with the new width. auto_add_to_context = false keeps a
+	-- layout toggle from re-adding the current file/selection to the context.
+	agentic.close()
+	agentic.open({ auto_add_to_context = false })
+
+	-- Leaving focus: reopen neo-tree at its own configured width (no squished
+	-- column to restore). Defer so agentic's layout settles first, and use
+	-- `show` so focus stays in the chat input rather than jumping to the tree.
+	if not focus_on and focus_reopen_neotree then
+		focus_reopen_neotree = false
+		vim.schedule(function()
+			vim.cmd("Neotree show")
+		end)
+	end
+end
+
 return {
 	{
 		"carlos-algms/agentic.nvim",
@@ -78,6 +133,46 @@ return {
 
 			-- Apply now in case the colorscheme is already loaded.
 			apply_highlights()
+
+			-- Buffer-local keymaps that live only inside the agentic windows.
+			-- These are contextual (only useful while the widget is open), so
+			-- keeping them here instead of the global <leader>a `keys` table
+			-- avoids cluttering the which-key group. Uses <localleader> to match
+			-- agentic's own built-in convention; avoid its reserved keys
+			-- (q, <S-Tab>, <Tab>, <CR>, <C-s>, <localleader>{s,m,t,p}, etc.).
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("AgenticLocalKeymaps", { clear = true }),
+				pattern = {
+					"AgenticChat",
+					"AgenticInput",
+					"AgenticCode",
+					"AgenticFiles",
+					"AgenticDiagnostics",
+					"AgenticTodos",
+				},
+				callback = function(ev)
+					local function map(lhs, rhs, desc)
+						vim.keymap.set("n", lhs, rhs, {
+							buffer = ev.buf,
+							silent = true,
+							desc = "Agentic: " .. desc,
+						})
+					end
+					map("<localleader>F", toggle_focus_width, "Toggle full-width focus")
+					map("<localleader>x", function()
+						require("agentic").stop_generation()
+					end, "Stop generation")
+					map("<localleader>L", function()
+						require("agentic").rotate_layout()
+					end, "Rotate layout")
+					map("<localleader>n", function()
+						require("agentic").new_session()
+					end, "New session")
+					map("<localleader>r", function()
+						require("agentic").restore_session()
+					end, "Restore session")
+				end,
+			})
 		end,
 		keys = {
 			{
@@ -136,6 +231,12 @@ return {
 					require("agentic").rotate_layout()
 				end,
 				desc = "Rotate layout",
+			},
+			{
+				"<leader>aF",
+				toggle_focus_width,
+				desc = "Toggle full-width focus",
+				mode = { "n", "v" },
 			},
 			{
 				"<leader>ac",
