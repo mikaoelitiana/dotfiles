@@ -9,7 +9,9 @@
       "Bash(curl -sL https://raw.githubusercontent.com/chancez/dotfiles/master/neovim/.config/nvim/lua/plugins/ai.lua)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(chezmoi apply *)",
+      "WebSearch"
     ]
   }
 }
