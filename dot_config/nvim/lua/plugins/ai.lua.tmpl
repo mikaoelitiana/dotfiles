@@ -65,6 +65,11 @@ return {
 		lazy = true,
 		opts = {
 			provider = "{{ dig "neovim" "agenticProvider" "opencode-acp" . }}",
+			acp_providers = {
+				["claude-agent-acp"] = {
+					default_mode = "auto",
+				},
+			},
 		},
 		init = function()
 			-- Map agentic.nvim highlight groups to the active catppuccin flavour.
