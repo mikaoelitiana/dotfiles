@@ -70,10 +70,25 @@ local function is_special_win(win)
 	return ft:match("^Agentic") ~= nil or ft == "neo-tree"
 end
 
+-- Jump the current window to the first git hunk in its buffer so the agent's
+-- change lands in view. gitsigns computes hunks asynchronously after a buffer
+-- loads/reloads, so defer the navigation to let it attach and diff first. No-op
+-- if gitsigns isn't available or the buffer has no hunks.
+local function jump_to_first_hunk()
+	local ok, gitsigns = pcall(require, "gitsigns")
+	if not ok then
+		return
+	end
+	vim.schedule(function()
+		gitsigns.nav_hunk("first", { navigation_message = false })
+	end)
+end
+
 -- on_file_edit hook: surface the file the agent just edited so its changes can
 -- be followed live. If the file is already shown in a window, jump to that
 -- window; otherwise open it in the first normal editor window (never in the
--- chat widget, neo-tree, or a floating window).
+-- chat widget, neo-tree, or a floating window). Once the file is focused, jump
+-- to its first change hunk so the edit is immediately in view.
 local function follow_edited_file(data)
 	local filepath = data.filepath
 	if type(filepath) ~= "string" or filepath == "" then
@@ -89,6 +104,7 @@ local function follow_edited_file(data)
 				if vim.api.nvim_win_get_buf(win) == data.bufnr then
 					vim.api.nvim_set_current_win(win)
 					vim.cmd.checktime(data.bufnr)
+					jump_to_first_hunk()
 					return
 				end
 			end
@@ -98,6 +114,7 @@ local function follow_edited_file(data)
 			if not is_special_win(win) then
 				vim.api.nvim_set_current_win(win)
 				vim.cmd.edit(vim.fn.fnameescape(filepath))
+				jump_to_first_hunk()
 				return
 			end
 		end
