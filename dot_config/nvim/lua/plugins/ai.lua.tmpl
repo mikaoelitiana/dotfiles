@@ -59,6 +59,51 @@ local function toggle_focus_width()
 	end
 end
 
+-- A window is "special" if it belongs to agentic's own widget, a file
+-- explorer, or is a floating window — none of these should be hijacked to
+-- display an edited file.
+local function is_special_win(win)
+	if vim.api.nvim_win_get_config(win).relative ~= "" then
+		return true
+	end
+	local ft = vim.bo[vim.api.nvim_win_get_buf(win)].filetype
+	return ft:match("^Agentic") ~= nil or ft == "neo-tree"
+end
+
+-- on_file_edit hook: surface the file the agent just edited so its changes can
+-- be followed live. If the file is already shown in a window, jump to that
+-- window; otherwise open it in the first normal editor window (never in the
+-- chat widget, neo-tree, or a floating window).
+local function follow_edited_file(data)
+	local filepath = data.filepath
+	if type(filepath) ~= "string" or filepath == "" then
+		return
+	end
+
+	-- Defer so agentic's own layout/redraw settles before we move focus.
+	vim.schedule(function()
+		local wins = vim.api.nvim_tabpage_list_wins(0)
+
+		if data.bufnr and vim.api.nvim_buf_is_loaded(data.bufnr) then
+			for _, win in ipairs(wins) do
+				if vim.api.nvim_win_get_buf(win) == data.bufnr then
+					vim.api.nvim_set_current_win(win)
+					vim.cmd.checktime(data.bufnr)
+					return
+				end
+			end
+		end
+
+		for _, win in ipairs(wins) do
+			if not is_special_win(win) then
+				vim.api.nvim_set_current_win(win)
+				vim.cmd.edit(vim.fn.fnameescape(filepath))
+				return
+			end
+		end
+	end)
+end
+
 return {
 	{
 		"carlos-algms/agentic.nvim",
@@ -69,6 +114,9 @@ return {
 				["claude-agent-acp"] = {
 					default_mode = "auto",
 				},
+			},
+			hooks = {
+				on_file_edit = follow_edited_file,
 			},
 		},
 		init = function()
