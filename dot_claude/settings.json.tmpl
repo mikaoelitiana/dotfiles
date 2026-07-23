@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__open-pencil__*"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '{{ .chezmoi.homeDir }}/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash {{ .chezmoi.homeDir }}/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "github@claude-plugins-official": true,
+    "notion-workspace-plugin@notion-plugin-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "notion-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "makenotion/claude-code-notion-plugin"
+      }
+    }
+  },
+  "theme": "auto"
+}
