@@ -1,5 +1,8 @@
 {{- /* keyring aborts the template when an item is absent, so probe via security(1) */ -}}
-{{- $playwrightToken := output "sh" "-c" (printf "security find-generic-password -s playwright-mcp -a %s -w 2>/dev/null || true" .chezmoi.username) | trim -}}
+{{- $playwrightToken := "" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $playwrightToken = output "sh" "-c" "security find-generic-password -s playwright-mcp -a mikaoelitiana -w 2>/dev/null || true" | trim -}}
+{{- end -}}
 {
   "mcpServers": {
     "notion": {

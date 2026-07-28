@@ -1,6 +1,9 @@
 {{- /* keyring aborts the template when an item is absent, so probe via security(1) */ -}}
 {{- $dokployUrl := dig "dokploy" "url" "" . -}}
-{{- $dokployKey := output "sh" "-c" (printf "security find-generic-password -s dokploy -a %s -w 2>/dev/null || true" .chezmoi.username) | trim -}}
+{{- $dokployKey := "" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $dokployKey = output "sh" "-c" "security find-generic-password -s dokploy -a mikaoelitiana -w 2>/dev/null || true" | trim -}}
+{{- end -}}
 {{- $dokployEnabled := and (ne $dokployUrl "") (ne $dokployKey "") -}}
 {
    "$schema": "https://opencode.ai/config.json",

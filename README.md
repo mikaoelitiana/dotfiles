@@ -79,10 +79,10 @@ token exists.
 
 ```sh
 # Dokploy API token (Dokploy panel -> Profile -> API keys)
-security add-generic-password -U -s dokploy -a "$USER" -w
+security add-generic-password -U -s dokploy -a mikaoelitiana -w
 
 # Playwright MCP browser-extension token
-security add-generic-password -U -s playwright-mcp -a "$USER" -w
+security add-generic-password -U -s playwright-mcp -a mikaoelitiana -w
 ```
 
 Passing `-w` last makes `security` prompt for the value instead of taking it as
@@ -130,6 +130,15 @@ Three things worth knowing:
 - The Dokploy server is gated on its secrets: with the token or URL missing it
   renders as `enabled: false` rather than failing at runtime. Other servers are
   enabled or disabled by hand.
+- **Every item uses `mikaoelitiana` as its keychain account**, deliberately
+  hardcoded rather than derived from `$USER`. The account field is an arbitrary
+  label, not an OS user, so a fixed value keeps one lookup working on every
+  machine regardless of login name. Deriving it from `$USER` would make an item
+  created on one machine invisible on another whose login differs — and the
+  symptom is a silently disabled server, not an error.
+
+On Linux there is no `security` binary; the probes and the fish exporter are
+guarded on `darwin`, so the affected servers simply render disabled.
 
 Claude Code is the odd one out. Its MCP servers live in `~/.claude.json`, which
 holds machine and account state and is deliberately *not* managed here, so
@@ -162,7 +171,7 @@ present.
 keychain, or the Dokploy URL is unset. Check with:
 
 ```sh
-security find-generic-password -s dokploy -a "$USER" -w
+security find-generic-password -s dokploy -a mikaoelitiana -w
 chezmoi data | grep -A2 dokploy
 ```
 
@@ -194,8 +203,8 @@ Keychain items (not chezmoi data — see [Secrets](#secrets)):
 | Service | Account | Used by |
 |---------|---------|---------|
 | `github` | your GitHub login | LM Studio MCP GitHub server, via chezmoi's `keyring` function |
-| `dokploy` | `$USER` | Dokploy MCP in Claude Code and opencode |
-| `playwright-mcp` | `$USER` | Playwright MCP in opencode, goose, symbiotic, LM Studio |
+| `dokploy` | `mikaoelitiana` | Dokploy MCP in Claude Code and opencode |
+| `playwright-mcp` | `mikaoelitiana` | Playwright MCP in opencode, goose, symbiotic, LM Studio |
 
 Built-in provider values: `claude-agent-acp`, `gemini-acp`, `codex-acp`, `opencode-acp`, `cursor-acp`, `copilot-acp`, `auggie-acp`, `mistral-vibe-acp`, `cline-acp`, `goose-acp`, `kiro-acp`, `pi-acp`.
 
