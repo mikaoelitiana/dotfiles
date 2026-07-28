@@ -1,1 +1,2 @@
 eval "$(mise activate bash)"
+. "$HOME/.cargo/env"
