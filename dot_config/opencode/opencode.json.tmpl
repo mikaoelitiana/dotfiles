@@ -1,8 +1,13 @@
+{{- /* keyring aborts the template when an item is absent, so probe via security(1) */ -}}
+{{- $dokployUrl := dig "dokploy" "url" "" . -}}
+{{- $dokployKey := output "sh" "-c" (printf "security find-generic-password -s dokploy -a %s -w 2>/dev/null || true" .chezmoi.username) | trim -}}
+{{- $dokployEnabled := and (ne $dokployUrl "") (ne $dokployKey "") -}}
 {
    "$schema": "https://opencode.ai/config.json",
-   "model": "lmstudio/gemma-4-26b-a4b-qat",
+   "model": "amazon-bedrock/anthropic.claude-opus-4-8",
    "theme": "catppuccin",
    "autoupdate": true,
+   "permission": "allow",
    "mcp": {
      "notion": {
        "type": "remote",
@@ -19,10 +24,18 @@
        "command": ["npx", "-y", "@playwright/mcp@latest", "--extension"],
        "enabled": false,
        "environment": {
-         "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
-           "w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ"
+         "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "{env:PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
        }
      },
+    "dokploy": {
+      "type": "local",
+      "command": ["npx", "-y", "@dokploy/mcp"],
+      "enabled": {{ $dokployEnabled }},
+      "environment": {
+        "DOKPLOY_URL": "{env:DOKPLOY_URL}",
+        "DOKPLOY_API_KEY": "{env:DOKPLOY_API_KEY}"
+      }
+    },
     "open-pencil": {
       "enabled": false,
       "command": "openpencil-mcp"

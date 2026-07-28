@@ -1,0 +1,18 @@
+{{- $dokployUrl := dig "dokploy" "url" "" . -}}
+{{- $dokployKey := output "sh" "-c" (printf "security find-generic-password -s dokploy -a %s -w 2>/dev/null || true" .chezmoi.username) | trim -}}
+{{- $dokployEnabled := and (ne $dokployUrl "") (ne $dokployKey "") -}}
+#!/bin/sh
+set -eu
+
+command -v claude >/dev/null 2>&1 || exit 0
+
+claude mcp remove -s user dokploy-mcp >/dev/null 2>&1 || true
+
+{{ if $dokployEnabled -}}
+claude mcp add -s user dokploy-mcp \
+    -e DOKPLOY_URL='${DOKPLOY_URL}' \
+    -e DOKPLOY_API_KEY='${DOKPLOY_API_KEY}' \
+    -- npx -y @dokploy/mcp
+{{- else -}}
+echo "dokploy-mcp: skipped (set the Dokploy URL via 'chezmoi init' and the token in Keychain)" >&2
+{{- end }}
