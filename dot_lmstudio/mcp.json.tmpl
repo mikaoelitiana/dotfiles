@@ -1,3 +1,5 @@
+{{- /* keyring aborts the template when an item is absent, so probe via security(1) */ -}}
+{{- $playwrightToken := output "sh" "-c" (printf "security find-generic-password -s playwright-mcp -a %s -w 2>/dev/null || true" .chezmoi.username) | trim -}}
 {
   "mcpServers": {
     "notion": {
@@ -17,8 +19,7 @@
        "args": ["-y", "@playwright/mcp@latest", "--extension"],
        "enabled": false,
        "environment": {
-         "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
-           "w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ"
+         "PLAYWRIGHT_MCP_EXTENSION_TOKEN": {{ $playwrightToken | quote }}
        }
      },
     "open-pencil": {

@@ -158,8 +158,9 @@ extensions:
       - -y
       - "@playwright/mcp@latest"
       - --extension
-    envs:
-      PLAYWRIGHT_MCP_EXTENSION_TOKEN: w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ
+    envs: {}
+    env_keys:
+      - PLAYWRIGHT_MCP_EXTENSION_TOKEN
     name: playwright
     display_name: Playwright
     bundled: false

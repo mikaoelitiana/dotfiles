@@ -22,10 +22,9 @@
       "command": ["npx", "-y", "@playwright/mcp@latest", "--extension"],
       "enabled": false,
       "environment": {
-        "PLAYWRIGHT_MCP_EXTENSION_TOKEN":
-          "w5_be3P84sSBMH2czlxU6AHFl1RFMyGgFjDOqSbGQgQ"
+        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "{env:PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
       }
     }
   },
-  "plugin": ["opencode-beads"],
+  "plugin": ["opencode-beads"]
 }
