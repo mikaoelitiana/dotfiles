@@ -4,10 +4,12 @@ Personal development environment configuration managed by [chezmoi](https://www.
 
 Includes:
 
-- Shell configurations (bash, zsh) with mise
+- Shell configurations (fish, bash, zsh) with mise
 - Git configuration and templates
 - Neovim editor setup
 - Tool configurations (lazygit, k9s, rectangle)
+- AI agent configurations (Claude Code, opencode, goose, LM Studio, symbiotic, serena)
+  including their MCP servers
 - Installation scripts for development tools
 
 ## Prerequisites
@@ -17,6 +19,8 @@ Includes:
 - `sudo` access (for Linux package installation)
 - `bash` available at `/bin/bash`
 - A [GitHub personal access token](https://github.com/settings/tokens) stored in your system keychain (see [Manual Steps](#manual-steps) below)
+- `fish` as your login shell — MCP secrets are exported from `conf.d`, so agents
+  launched outside fish will not see them (see [Secrets](#secrets))
 
 ## Installation
 
@@ -30,7 +34,7 @@ This single command will bootstrap your entire environment:
 
 1. **Install chezmoi** to `~/.local/bin/` (via the official `get.chezmoi.io` installer)
 2. **Clone** this dotfiles repository
-3. **Prompt** for your email address and preferred ACP provider (stored in chezmoi config for git, jj, and neovim templates)
+3. **Prompt** for your email address, preferred ACP provider, and Dokploy server URL (stored in chezmoi config for git, jj, neovim, and MCP templates)
 4. **Install Homebrew** on macOS if not already present (on Linux, updates the system package manager)
 5. **Apply** all dotfiles to your home directory
 6. **Install packages** (via Homebrew on macOS, native package managers on Linux)
@@ -68,13 +72,98 @@ This copies your existing `gh` auth token into the macOS Keychain. Verify:
 security find-generic-password -a "$(gh api user --jq .login)" -s github -w
 ```
 
-### 2. Set your default shell to fish
+### 2. Store your MCP tokens in the system keychain
+
+Both are optional — the MCP server that needs each one stays disabled until the
+token exists.
+
+```sh
+# Dokploy API token (Dokploy panel -> Profile -> API keys)
+security add-generic-password -U -s dokploy -a "$USER" -w
+
+# Playwright MCP browser-extension token
+security add-generic-password -U -s playwright-mcp -a "$USER" -w
+```
+
+Passing `-w` last makes `security` prompt for the value instead of taking it as
+an argument, so the token never lands in your shell history.
+
+The Dokploy *URL* is not a secret and is not stored in the keychain — it is
+chezmoi data, prompted by `chezmoi init`. Set or change it with
+`chezmoi edit-config`.
+
+### 3. Set your default shell to fish
 
 ```sh
 # Add fish to the list of allowed shells
 command -v fish | sudo tee -a /etc/shells
 # Set fish as your default login shell
 chsh -s "$(command -v fish)"
+```
+
+## Secrets
+
+**This repository is public. No secret may ever be committed to it**, including
+inside a template — templates are committed too.
+
+Secrets live in the macOS Keychain and reach configs through the environment:
+
+```
+Keychain --security(1)--> fish conf.d exports --> {env:VAR}  (opencode, symbiotic)
+                                             --> ${VAR}      (Claude Code)
+                                             --> env_keys    (goose)
+```
+
+`dot_config/fish/conf.d/mcp-secrets.fish.tmpl` does the exporting. Because the
+values are read from the environment at runtime, no config file on disk contains
+a token — with one exception, below.
+
+Three things worth knowing:
+
+- **LM Studio** has no environment substitution, so `dot_lmstudio/mcp.json.tmpl`
+  renders the token into `~/.lmstudio/mcp.json` at apply time. That file holds
+  plaintext; it is outside this repository.
+- **Do not use chezmoi's `keyring` template function to test whether a secret
+  exists.** It aborts the entire template when the item is absent, which breaks
+  every `chezmoi apply`. Probe with `output "sh" "-c" "security ... || true"`
+  instead, as the MCP templates do.
+- The Dokploy server is gated on its secrets: with the token or URL missing it
+  renders as `enabled: false` rather than failing at runtime. Other servers are
+  enabled or disabled by hand.
+
+Claude Code is the odd one out. Its MCP servers live in `~/.claude.json`, which
+holds machine and account state and is deliberately *not* managed here, so
+`run_onchange_configure-dokploy-mcp.sh.tmpl` registers the server with
+`claude mcp add -s user` instead — and removes it when the token or URL is gone.
+
+### Files seeded once, never overwritten
+
+Two managed files use chezmoi's `create_` prefix because their applications
+rewrite them at runtime, so a normal managed file would drift on every apply:
+
+| File | Rewritten by |
+|---|---|
+| `~/.serena/serena_config.yml` | Serena, appending each project you open |
+| `~/Library/Preferences/com.knollsoft.Rectangle.plist` | Rectangle, bumping a launch counter |
+
+They are written on a fresh machine and left alone afterwards. To push a
+deliberate change to one, edit the target directly — `chezmoi apply` will not
+touch it.
+
+## Troubleshooting
+
+**Dokploy MCP fails with `Invalid URL`.** The agent was not launched from a fish
+shell, so `DOKPLOY_URL` and `DOKPLOY_API_KEY` were never exported. Launch it
+from fish (`exec fish`, then start the agent). This is not a chezmoi problem —
+`chezmoi cat ~/.config/fish/conf.d/mcp-secrets.fish` will show the exports are
+present.
+
+**An MCP server is missing or shows as disabled.** Its token is not in the
+keychain, or the Dokploy URL is unset. Check with:
+
+```sh
+security find-generic-password -s dokploy -a "$USER" -w
+chezmoi data | grep -A2 dokploy
 ```
 
 ## Platform-Specific Behavior
@@ -96,8 +185,17 @@ The following keys can be set under `[data]` in your chezmoi config (`chezmoi ed
 
 | Key | Description | Default |
 |-----|-------------|---------|
+| `data.email` | Email address used by the git, jj, and neovim templates | prompted |
 | `data.neovim.agenticProvider` | ACP provider used by [agentic.nvim](https://github.com/carlos-algms/agentic.nvim) | `opencode-acp` |
-| `keyring("github", "<user>")` | GitHub PAT used by LM Studio MCP and other integrations. Stored in system keychain via `security add-generic-password`. | — |
+| `data.dokploy.url` | Dokploy server URL for the Dokploy MCP server. Unset disables the server. | prompted |
+
+Keychain items (not chezmoi data — see [Secrets](#secrets)):
+
+| Service | Account | Used by |
+|---------|---------|---------|
+| `github` | your GitHub login | LM Studio MCP GitHub server, via chezmoi's `keyring` function |
+| `dokploy` | `$USER` | Dokploy MCP in Claude Code and opencode |
+| `playwright-mcp` | `$USER` | Playwright MCP in opencode, goose, symbiotic, LM Studio |
 
 Built-in provider values: `claude-agent-acp`, `gemini-acp`, `codex-acp`, `opencode-acp`, `cursor-acp`, `copilot-acp`, `auggie-acp`, `mistral-vibe-acp`, `cline-acp`, `goose-acp`, `kiro-acp`, `pi-acp`.
 
@@ -106,6 +204,9 @@ Example `~/.config/chezmoi/chezmoi.toml`:
 ```toml
 [data]
   email = "you@example.com"
+
+[data.dokploy]
+  url = "https://dokploy.example.com"
 
 [data.neovim]
   agenticProvider = "claude-agent-acp"
