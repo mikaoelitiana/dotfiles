@@ -28,9 +28,8 @@ rules = [
   { state = "waiting", pattern = "(?im)\\?\\s*(y/n/.*\\?)" },
   
   # Working state - when Vibe is actively processing
-  { state = "working", pattern = "(?im)^\\s*\\u2500\\u2500\\u2500" },  # ▀▀▀ spinner
-  { state = "working", pattern = "(?im)^\\s*\\u2588\\u2588\\u2588" },  # ███ spinner
-  { state = "working", pattern = "(?im)^\\s*\\u2502" },  # │ spinner
+  { state = "working", pattern = "(?im)thinking\\." },
+  { state = "working", pattern = "(?im)generating\\." },
   { state = "working", pattern = "(?im)thinking" },
   { state = "working", pattern = "(?im)generating" },
   { state = "working", pattern = "(?im)executing" },
@@ -41,8 +40,8 @@ rules = [
   { state = "working", pattern = "(?im)searching" },
   
   # Error state
-  { state = "errored", pattern = "\\u2717" },  # ✗
-  { state = "errored", pattern = "\\u274c" },  # ❌
+  { state = "errored", pattern = "(?im)\\[x\\]" },
+  { state = "errored", pattern = "(?im)\\[X\\]" },
   { state = "errored", pattern = "(?im)^\\s*error:" },
   { state = "errored", pattern = "(?im)^\\s*Error" },
   { state = "errored", pattern = "(?im)failed" },
