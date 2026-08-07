@@ -20,12 +20,12 @@ activity_cutoff = "(?m)^\\s*> "
 # Rules are evaluated top-down, first match wins
 rules = [
   # Waiting state - when Vibe is waiting for user input or approval
-  { state = "waiting", pattern = "(?im)approve\\?\\s*\\\(y/n\\\)" },
+  { state = "waiting", pattern = "(?im)approve\\?\\s*(y/n)" },
   { state = "waiting", pattern = "(?im)permission\\s+required" },
   { state = "waiting", pattern = "(?im)press\\s+enter\\s+to\\s+continue" },
   { state = "waiting", pattern = "(?im)waiting\\s+for\\s+approval" },
   { state = "waiting", pattern = "(?im)requires\\s+your\\s+approval" },
-  { state = "waiting", pattern = "(?im)\\?\\s*\\\(y/n/.*\\\)" },
+  { state = "waiting", pattern = "(?im)\\?\\s*(y/n/.*\\?)" },
   
   # Working state - when Vibe is actively processing
   { state = "working", pattern = "(?im)^\\s*\\u2500\\u2500\\u2500" },  # ▀▀▀ spinner
