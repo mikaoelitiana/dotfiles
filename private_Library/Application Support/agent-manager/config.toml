@@ -59,3 +59,7 @@ prompt_flag = ""
 
 # No session ID flag - Vibe manages sessions internally
 session_id_flag = ""
+
+# UI Settings
+[ui]
+theme_auto = true
