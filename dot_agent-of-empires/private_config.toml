@@ -1,0 +1,132 @@
+default_profile = ""
+
+[acp]
+allow_agent_install = false
+allowed_agents = []
+auto_stop_idle_secs = 3600
+compaction_reminder = false
+compaction_reminder_percent = 75
+default_agent = "aoe-agent"
+max_concurrent_workers = 100
+node_path = ""
+offer_structured_in_new_session = false
+rate_limit_auto_resume = false
+replay_events = 0
+restrict_agents = false
+show_tool_durations = true
+silent_orphan_grace_secs = 120
+
+[auth]
+persist_sessions = true
+
+[diff]
+context_lines = 3
+split_view = false
+
+[hooks]
+
+[host_hooks]
+
+[logging]
+default_level = "info"
+file_path = "debug.log"
+keep_count = 5
+max_size_mib = 50
+output = "file"
+rotation = "size"
+show_spans = false
+
+[logging.targets]
+
+[sandbox]
+auto_cleanup = true
+container_runtime = "docker"
+default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
+default_terminal_mode = "host"
+enabled_by_default = false
+environment = [
+    "TERM",
+    "COLORTERM",
+    "FORCE_COLOR",
+    "NO_COLOR",
+]
+extra_volumes = []
+mount_ssh = false
+selinux_relabel = false
+volume_ignores = []
+volume_ignores_strategy = "anonymous"
+
+[session]
+agent_status_hooks = true
+auto_resume_on_restart = true
+auto_stop_idle_secs = 0
+click_action = "live_send"
+confirm_before_quit = true
+confirm_delete = false
+conversation_summary = false
+default_attach_mode = "live_send"
+delete_to_trash = true
+favorites_first = true
+live_send_exit_chord = "C-q"
+live_send_leader = "C-b"
+live_send_on_view_switch = false
+merge_hooks_into_selected_agent = true
+mouse_capture = true
+opencode_preassign_session_id = false
+prevent_sleep_idle_grace_minutes = 15
+prevent_sleep_when_active = false
+restart_wake_message = "wake up: pick up what you were doing"
+row_tag = "branch"
+show_session_colors = true
+show_tips = true
+smart_rename = true
+smart_rename_agent = ""
+snooze_duration_minutes = 30
+strict_hotkeys = false
+tie_workdir_to_name = false
+trash_retention_days = 30
+unread_indicator = true
+yolo_mode_default = false
+
+[skills]
+auto_propagate = false
+
+[sound]
+enabled = false
+
+[status_hooks]
+enabled = false
+
+[telemetry]
+enabled = false
+
+[theme]
+color_mode = "truecolor"
+idle_decay_minutes = 0
+name = "catppuccin-latte"
+
+[tmux]
+clipboard = "auto"
+mouse = "auto"
+status_bar = "auto"
+vt_live = true
+
+[updates]
+auto_update_plugins = false
+update_check_mode = "notify"
+
+[web]
+notifications_enabled = true
+notify_on_error = true
+notify_on_idle = false
+notify_on_waiting = true
+notify_on_wake_fire = true
+
+[worktree]
+auto_cleanup = true
+bare_repo_path_template = "./{branch}"
+delete_branch_on_cleanup = false
+enabled = false
+init_submodules = true
+path_template = "./.worktrees/{branch}"
+workspace_path_template = "./.worktrees/{branch}-workspace-{session-id}"
