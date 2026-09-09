@@ -1,3 +1,7 @@
+if vim.fn.executable("jj") == 0 then
+	return {}
+end
+
 local wk = require("which-key")
 
 wk.add({
