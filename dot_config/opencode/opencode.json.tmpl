@@ -9,7 +9,8 @@
    "$schema": "https://opencode.ai/config.json",
    "model": "amazon-bedrock/eu.anthropic.claude-opus-5",
    "theme": "catppuccin",
-   "autoupdate": true,
+   {{/* off while opencode is pinned to 1.18.29 (mise): 1.18.30 crashes on every prompt in SystemPrompt.environment */ -}}
+   "autoupdate": false,
    "permission": "allow",
    "mcp": {
      "notion": {
@@ -42,8 +43,9 @@
       }
     },
     "open-pencil": {
+      "type": "local",
       "enabled": false,
-      "command": "openpencil-mcp"
+      "command": ["openpencil-mcp"]
     },
     "serena": {
       "type": "local",
