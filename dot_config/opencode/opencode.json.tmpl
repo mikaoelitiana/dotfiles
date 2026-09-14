@@ -7,7 +7,7 @@
 {{- $dokployEnabled := and (ne $dokployUrl "") (ne $dokployKey "") -}}
 {
    "$schema": "https://opencode.ai/config.json",
-   "model": "amazon-bedrock/anthropic.claude-opus-4-8",
+   "model": "amazon-bedrock/eu.anthropic.claude-opus-5",
    "theme": "catppuccin",
    "autoupdate": true,
    "permission": "allow",
@@ -36,7 +36,9 @@
       "enabled": {{ $dokployEnabled }},
       "environment": {
         "DOKPLOY_URL": "{env:DOKPLOY_URL}",
-        "DOKPLOY_API_KEY": "{env:DOKPLOY_API_KEY}"
+        "DOKPLOY_API_KEY": "{env:DOKPLOY_API_KEY}",
+        "DOKPLOY_TOOL_PRESET": "deploy",
+        "DOKPLOY_DISABLED_TAGS": "dnsProvider"
       }
     },
     "open-pencil": {

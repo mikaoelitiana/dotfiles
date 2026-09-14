@@ -2,8 +2,11 @@
 
 . "$HOME/.local/bin/env"
 
+eval "$(mise activate zsh)"
+
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/mikaoelitiana/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
 
-eval "$(mise activate zsh)"
+# Point Docker clients (and the Fabro server daemon) at the Colima socket
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"

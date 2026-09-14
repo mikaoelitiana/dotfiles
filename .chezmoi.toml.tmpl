@@ -1,9 +1,13 @@
 {{ $email := promptStringOnce . "email" "What is your email address" -}}
 {{ $agenticProvider := promptChoiceOnce . "neovim.agenticProvider" "Which ACP provider do you want to use" (list "claude-agent-acp" "gemini-acp" "codex-acp" "opencode-acp" "cursor-acp" "copilot-acp" "auggie-acp" "mistral-vibe-acp" "cline-acp" "goose-acp" "kiro-acp" "pi-acp") -}}
 {{ $dokployUrl := promptStringOnce . "dokploy.url" "What is your Dokploy server URL" -}}
+{{ $bedrockProfile := promptStringOnce . "aws.bedrockProfile" "Which AWS profile fronts Bedrock (blank if none)" -}}
 
 [data]
   email = {{ $email | quote }}
+
+[data.aws]
+  bedrockProfile = {{ $bedrockProfile | quote }}
 
 [data.dokploy]
   url = {{ $dokployUrl | quote }}

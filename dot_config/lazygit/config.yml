@@ -5,6 +5,6 @@ gui:
   nerdFontsVersion: "3"
   showIcons: true
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: diff-so-fancy
+      command: diff-so-fancy
