@@ -4,7 +4,6 @@
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $dokployKey = output "sh" "-c" "security find-generic-password -s dokploy -a mikaoelitiana -w 2>/dev/null || true" | trim -}}
 {{- end -}}
-{{- $dokployEnabled := and (ne $dokployUrl "") (ne $dokployKey "") -}}
 {
    "$schema": "https://opencode.ai/config.json",
    "model": "amazon-bedrock/eu.anthropic.claude-opus-5",
@@ -34,7 +33,7 @@
     "dokploy": {
       "type": "local",
       "command": ["npx", "-y", "@dokploy/mcp"],
-      "enabled": {{ $dokployEnabled }},
+      "enabled": false,
       "environment": {
         "DOKPLOY_URL": "{env:DOKPLOY_URL}",
         "DOKPLOY_API_KEY": "{env:DOKPLOY_API_KEY}",
