@@ -1,2 +1,5 @@
 # https://www.chezmoi.io/user-guide/include-files-from-elsewhere/#include-a-subdirectory-from-a-url
 .chezmoiexternal.toml
+dot_pi/**/*auth.json*
+dot_pi/**/*trust.json*
+dot_pi/**/*sessions*/

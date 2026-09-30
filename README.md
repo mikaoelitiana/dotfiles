@@ -8,7 +8,7 @@ Includes:
 - Git configuration and templates
 - Neovim editor setup
 - Tool configurations (lazygit, k9s, rectangle)
-- AI agent configurations (Claude Code, opencode, goose, LM Studio, symbiotic, serena)
+- AI agent configurations (Claude Code, opencode, Pi, goose, LM Studio, symbiotic, serena)
   including their MCP servers
 - Installation scripts for development tools
 
@@ -54,6 +54,45 @@ To pull the latest changes and re-apply:
 ```sh
 chezmoi update
 ```
+
+## Pi
+
+[Pi](https://pi.dev/) is installed automatically by mise during `chezmoi apply`.
+The global mise configuration tracks `npm:@earendil-works/pi-coding-agent` and
+Node.js (Pi requires Node.js 22.19 or newer). The package follows `latest`, subject
+to mise's release-age filtering; update an existing installation with
+`mise upgrade npm:@earendil-works/pi-coding-agent`.
+
+Start `pi` in a trusted working directory. Use `/login` to connect a subscription
+or API-key provider, and `/model` to choose a model. Multiple provider logins can
+coexist; no startup provider or model is enforced by these dotfiles.
+
+For Amazon Bedrock, use a locally configured AWS profile:
+
+```sh
+aws sso login --profile your-profile
+AWS_PROFILE=your-profile pi
+```
+
+The SSO login is only needed for SSO profiles. Pi uses the profile's region; set
+`AWS_REGION` if it is not configured. Choose a Bedrock model with `/model`.
+
+`~/.pi/agent/settings.json` is managed with private file permissions and disables
+install telemetry and analytics. After experimenting with `/settings`, review
+and capture portable changes with `chezmoi add ~/.pi/agent/settings.json` before
+committing them. Applying the tracked settings can overwrite local preferences.
+
+Authentication (`auth.json`), project trust (`trust.json`), and conversation
+history (`sessions/`) stay local to each computer and are Git-ignored in the Pi
+source directory. Never add the entire `~/.pi` directory; configuration can also
+contain secrets, such as API keys in `models.json`. Authenticate separately on
+each computer. Changes reach other computers only after committing and pushing
+them, then running `chezmoi update` there.
+
+Pi does not ask permission for each command and is not sandboxed. Use a scratch
+repository for experiments and a container for untrusted work.
+
+Validate the tracked setup with `python3 .tests/test_pi_setup.py`.
 
 ## Manual Steps
 
