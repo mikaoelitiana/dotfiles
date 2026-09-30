@@ -1,4 +1,7 @@
 {
   "enableInstallTelemetry": false,
-  "enableAnalytics": false
+  "enableAnalytics": false,
+  "lastChangelogVersion": "0.99.1",
+  "theme": "light",
+  "tuiMode": "fullscreen"
 }
