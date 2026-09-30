@@ -13,7 +13,10 @@ class PiSetupTest(unittest.TestCase):
         with (ROOT / "dot_config/mise/config.toml").open("rb") as config_file:
             tools = tomllib.load(config_file)["tools"]
         self.assertIn("node", tools)
-        self.assertEqual(tools.get("npm:@earendil-works/pi-coding-agent"), "latest")
+        self.assertEqual(
+            tools.get("npm:@earendil-works/pi-coding-agent"),
+            {"version": "latest", "minimum_release_age": "0d"},
+        )
         self.assertIn("mise install", (ROOT / "run_after_apply.sh").read_text())
 
         settings_path = "dot_pi/agent/private_settings.json"

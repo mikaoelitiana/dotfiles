@@ -59,8 +59,8 @@ chezmoi update
 
 [Pi](https://pi.dev/) is installed automatically by mise during `chezmoi apply`.
 The global mise configuration tracks `npm:@earendil-works/pi-coding-agent` and
-Node.js (Pi requires Node.js 22.19 or newer). The package follows `latest`, subject
-to mise's release-age filtering; update an existing installation with
+Node.js (Pi requires Node.js 22.19 or newer). Pi follows `latest` with no release-age
+delay; update an existing installation with
 `mise upgrade npm:@earendil-works/pi-coding-agent`.
 
 Start `pi` in a trusted working directory. Use `/login` to connect a subscription

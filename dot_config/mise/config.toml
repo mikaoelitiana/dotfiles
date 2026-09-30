@@ -10,6 +10,6 @@ erlang = "latest"
 elixir = "latest"
 "npm:@agentclientprotocol/claude-agent-acp" = "latest"
 "npm:gnhf" = "latest"
-"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", minimum_release_age = "0d" }
 python = "3.13"
 "pipx:serena-agent" = "latest"
