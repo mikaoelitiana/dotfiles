@@ -21,6 +21,7 @@ packages:
       - "zellij"
       - "mac-cleanup-go"
       - "docker"
+      - "docker-agent"
       - "jj"
       - "lazyjj"
       - "rtk"
