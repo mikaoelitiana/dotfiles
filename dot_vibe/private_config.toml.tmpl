@@ -3,7 +3,7 @@
 {{- /* spawn time via `sh -c` instead of being written into this file.          */ -}}
 {{- $dokployUrl := dig "dokploy" "url" "" . -}}
 {{- $darwin := eq .chezmoi.os "darwin" -}}
-active_model = "mistral-medium-3.5"
+active_model = "glm-5-3"
 vim_keybindings = false
 theme = "ansi-dark"
 disable_welcome_banner_animation = false
@@ -38,7 +38,7 @@ agent_paths = []
 enabled_agents = []
 disabled_agents = []
 installed_agents = []
-default_agent = "default"
+default_agent = "ask"
 skill_paths = []
 enabled_skills = []
 disabled_skills = []
@@ -63,7 +63,13 @@ args = [
     "-c",
     "DOKPLOY_API_KEY=$(security find-generic-password -s dokploy -a mikaoelitiana -w) exec npx -y @dokploy/mcp",
 ]
-env = { DOKPLOY_URL = {{ $dokployUrl | quote }} }
+disabled_tools = [
+    "dnsProvider-createRecord",
+    "dnsProvider-updateRecord",
+]
+
+[mcp_servers.env]
+DOKPLOY_URL = {{ $dokployUrl | quote }}
 {{ end }}{{ end }}
 [[mcp_servers]]
 name = "open-pencil"
@@ -204,6 +210,7 @@ allowlist = [
     "find",
     "fmt",
     "fold",
+    "gh run view",
     "git add",
     "git branch",
     "git checkout",
@@ -343,7 +350,9 @@ model = "mistral-vibe-cli-with-tools"
 
 [tools.web_fetch]
 permission = "ask"
-allowlist = []
+allowlist = [
+    "github.com",
+]
 denylist = []
 sensitive_patterns = []
 default_timeout = 30
@@ -369,16 +378,6 @@ sensitive_patterns = [
 max_write_bytes = 64000
 create_parent_dirs = true
 
-[tools.read]
-permission = "always"
-allowlist = []
-denylist = []
-sensitive_patterns = [
-    "**/.env",
-    "**/.env.*",
-]
-max_read_bytes = 64000
-
 [tools.edit]
 permission = "always"
 allowlist = []
@@ -388,3 +387,13 @@ sensitive_patterns = [
     "**/.env.*",
 ]
 fuzzy_threshold = 0.9
+
+[tools.read_file]
+permission = "always"
+allowlist = []
+denylist = []
+sensitive_patterns = [
+    "**/.env",
+    "**/.env.*",
+]
+max_read_bytes = 64000
