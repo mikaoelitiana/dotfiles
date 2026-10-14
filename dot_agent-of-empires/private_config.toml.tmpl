@@ -40,10 +40,10 @@ show_spans = false
 
 [sandbox]
 auto_cleanup = true
-container_runtime = "docker"
+container_runtime = "apple_container"
 default_image = "ghcr.io/agent-of-empires/aoe-sandbox:latest"
 default_terminal_mode = "host"
-enabled_by_default = false
+enabled_by_default = true
 environment = [
     "TERM",
     "COLORTERM",
@@ -52,6 +52,7 @@ environment = [
 ]
 extra_volumes = []
 mount_ssh = false
+privileged = false
 selinux_relabel = false
 volume_ignores = []
 volume_ignores_strategy = "anonymous"
@@ -64,6 +65,7 @@ click_action = "live_send"
 confirm_before_quit = true
 confirm_delete = false
 conversation_summary = false
+daemon_sidebar = true
 default_attach_mode = "live_send"
 delete_to_trash = true
 favorites_first = true
@@ -73,11 +75,14 @@ live_send_leader = "C-b"
 live_send_on_view_switch = false
 merge_hooks_into_selected_agent = true
 mouse_capture = true
+new_session_mode = "match_default"
 opencode_preassign_session_id = false
+pre_trust_agent_folders = false
 prevent_sleep_idle_grace_minutes = 15
 prevent_sleep_when_active = false
 restart_wake_message = "wake up: pick up what you were doing"
 row_tag = "branch"
+session_id_poller_max_threads = 50
 show_diagnostics_pane = true
 show_session_colors = true
 show_tips = true
@@ -86,7 +91,7 @@ smart_rename_agent = ""
 snooze_duration_minutes = 30
 strict_hotkeys = false
 tie_workdir_to_name = false
-trash_retention_days = 30
+trash_retention_minutes = 43200
 unread_indicator = true
 yolo_mode_default = false
 
@@ -94,6 +99,7 @@ yolo_mode_default = false
 claude-bedrock = "claude"
 
 [session.custom_agents]
+agent-team = "env AWS_PROFILE={{ .aws.bedrockProfile }} ./.agent-team/agent"
 claude-bedrock = "env CLAUDE_CODE_USE_BEDROCK=1 AWS_REGION=eu-west-1 AWS_PROFILE={{ .aws.bedrockProfile }} ANTHROPIC_MODEL='global.anthropic.claude-opus-5[1m]' ANTHROPIC_DEFAULT_OPUS_MODEL='global.anthropic.claude-opus-5[1m]' ANTHROPIC_DEFAULT_SONNET_MODEL='global.anthropic.claude-sonnet-5[1m]' ANTHROPIC_DEFAULT_HAIKU_MODEL=eu.anthropic.claude-haiku-4-5-20251001-v1:0 ANTHROPIC_DEFAULT_FABLE_MODEL='global.anthropic.claude-fable-5-1[1m]' ANTHROPIC_SMALL_FAST_MODEL=eu.anthropic.claude-haiku-4-5-20251001-v1:0 claude"
 
 [skills]
