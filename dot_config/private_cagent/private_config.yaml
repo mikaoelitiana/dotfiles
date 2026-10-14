@@ -1,3 +1,4 @@
+version: v1
 settings:
   theme: auto
   theme_dark: catppuccin-mocha
