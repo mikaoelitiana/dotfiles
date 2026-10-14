@@ -1,7 +1,9 @@
 {
   "enableInstallTelemetry": false,
   "enableAnalytics": false,
-  "lastChangelogVersion": "0.99.1",
+  "lastChangelogVersion": "1.0.3",
   "theme": "light",
-  "tuiMode": "fullscreen"
+  "tuiMode": "fullscreen",
+  "defaultProvider": "amazon-bedrock",
+  "defaultModel": "global.openai.gpt-6-astra"
 }
